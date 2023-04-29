@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F89E76529FD21AE00545DC5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E76429FD21AE00545DC5 /* Theme.swift */; };
 		2FAA6B8A29FD1A65004DE60A /* NewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8929FD1A65004DE60A /* NewsApp.swift */; };
 		2FAA6B8C29FD1A65004DE60A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8B29FD1A65004DE60A /* ContentView.swift */; };
 		2FAA6B8E29FD1A66004DE60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8D29FD1A66004DE60A /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F89E76429FD21AE00545DC5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		2FAA6B8629FD1A65004DE60A /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FAA6B8929FD1A65004DE60A /* NewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApp.swift; sourceTree = "<group>"; };
 		2FAA6B8B29FD1A65004DE60A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 		2F89E75E29FD1C8800545DC5 /* Assets+Preview */ = {
 			isa = PBXGroup;
 			children = (
+				2F89E76329FD217900545DC5 /* Themes */,
 				2FAA6B8F29FD1A66004DE60A /* Preview Content */,
 				2FAA6B8D29FD1A66004DE60A /* Assets.xcassets */,
 			);
@@ -75,6 +78,14 @@
 			children = (
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		2F89E76329FD217900545DC5 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				2F89E76429FD21AE00545DC5 /* Theme.swift */,
+			);
+			name = Themes;
 			sourceTree = "<group>";
 		};
 		2FAA6B7D29FD1A65004DE60A = {
@@ -185,6 +196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F89E76529FD21AE00545DC5 /* Theme.swift in Sources */,
 				2FAA6B8C29FD1A65004DE60A /* ContentView.swift in Sources */,
 				2FAA6B8A29FD1A65004DE60A /* NewsApp.swift in Sources */,
 			);
