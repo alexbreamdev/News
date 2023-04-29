@@ -12,6 +12,9 @@ struct NewsApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .onAppear {
+                    print(MockService.shared.article)
+                }
         }
     }
 }

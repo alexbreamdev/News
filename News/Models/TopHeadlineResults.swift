@@ -15,19 +15,7 @@ struct TopHeadlinesResult: Codable {
 }
 
 // MARK: - Article
-struct Article: Codable, Identifiable {
-   
-    var publishedDate: String {
-        if Calendar.current.isDate(publishedAt, equalTo: Date.now, toGranularity: .day) {
-            return "Today, \(publishedAt.formatted(date: .omitted, time: .shortened))"
-        } else {
-            return publishedAt.formattedDate()
-        }
-    }
-    
-    var id: String {
-        return (source.id ?? "") + source.name + ISO8601DateFormatter().string(from: publishedAt)
-    }
+struct Article: Codable {
     let source: Source
     let author, title: String?
     let description: String?
@@ -41,6 +29,20 @@ struct Article: Codable, Identifiable {
 struct Source: Codable {
     let id: String?
     let name: String
+}
+
+extension Article: Identifiable {
+    var id: String {
+        return (source.id ?? "") + source.name + ISO8601DateFormatter().string(from: publishedAt)
+    }
+    
+    var publishedDate: String {
+        if Calendar.current.isDate(publishedAt, equalTo: Date.now, toGranularity: .day) {
+            return "Today, \(publishedAt.formatted(date: .omitted, time: .shortened))"
+        } else {
+            return publishedAt.formattedDate()
+        }
+    }
 }
 
 
