@@ -16,10 +16,12 @@ struct MainView: View {
                     .tag(1)
                 TabItemView(title: "Categories", systemIconName: "newspaper", selectedTab: $selectedTab)
                     .tag(2)
-                TabItemView(title: "Profile", systemIconName: "person.fill", selectedTab: $selectedTab)
+                TabItemView(title: "Media", systemIconName: "globe", selectedTab: $selectedTab)
+                    .tag(2)
+                TabItemView(title: "Search", systemIconName: "magnifyingglass", selectedTab: $selectedTab)
                     .tag(3)
             }
-            .tint(.purple)
+            .tint(DefaultTheme.tintColor)
     }
 }
 

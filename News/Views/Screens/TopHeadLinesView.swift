@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct TopHeadLinesView: View {
+    @State private var selectedIndex: Int = 0
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 15) {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(height: 250)
                     .padding(.horizontal)
@@ -23,20 +24,28 @@ struct TopHeadLinesView: View {
                 
                 CategoryListRoulette()
                 
-                List {
-                    ForEach(0..<10, id: \.self) {_ in
-                            VStack {
-                                Text("News title long and large")
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                                
-                                Text("Short description")
-                            }
-                        
-                    }
+                HStack {
+                    Text("See more")
+                        .multilineTextAlignment(.trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .foregroundColor(DefaultTheme.tintColor)
+                        .fontWeight(.semibold)
+                        .padding(.trailing, 20)
                 }
+                
+                List {
+                    ForEach(0..<10, id: \.self) { index in
+                           NewsListRowView()
+                            .onTapGesture {
+                                selectedIndex = index
+                            }
+                            .listRowBackground(selectedIndex == index ? Color.secondary.opacity(0.3) : DefaultTheme.backgroundPrimary)
+                    }
+                    .listRowSeparator(.visible)
+                }
+                .scrollIndicators(.hidden)
                 .listStyle(.inset)
-                .padding(.bottom, 50)
+                
             }
         }
         .tabItem {
