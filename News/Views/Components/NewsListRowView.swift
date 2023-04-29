@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct NewsListRowView: View {
+    let article: ArticleViewModel
+    @State private var menuPressed: Bool = false
+    
     var body: some View {
         HStack(alignment: .top) {
             
@@ -28,38 +31,48 @@ struct NewsListRowView: View {
                         .background(DefaultTheme.tintColor.opacity(0.3))
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5)
                         )
-                    Text("04\\20\\2023")
+                    Text(article.publishedDate)
                         .foregroundColor(.secondary)
                         .fontWeight(.semibold)
                         .font(.caption)
                        
                 }
                 
-                Text("Article Title here")
-                    .font(.title3)
-                    .fontWeight(.bold)
+                Text(article.title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
                     .multilineTextAlignment(.leading)
-                
-                
-            
             }
             .padding(.horizontal, 5)
-            Spacer()
+            Spacer(minLength: 30)
             
-            Button {
-                
-            } label: {
-                Image(systemName: "ellipsis")
-                    .font(.title3)
-                    .frame(width: 40, height: 40)
-                    .rotationEffect(.degrees(90))
-            }
+            Rectangle()
+                .frame(width: 30, height: 30)
+                .foregroundColor(Color.clear)
+                .allowsHitTesting(false)
+                .overlay(alignment: .trailing) {
+                        Image(systemName: "ellipsis")
+                            .font(.title3)
+                            .foregroundColor(menuPressed ? Color.yellow : Color.primary)
+                            .frame(width: 30, height: 30)
+                            .rotationEffect(.degrees(90))
+                            .allowsHitTesting(true)
+                            .onTapGesture {
+                                withAnimation {
+                                    menuPressed.toggle()
+                                    
+                                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in menuPressed.toggle()}
+                                }
+                                print("Pressed button")
+                            }
+                }
+         
         }
     }
 }
 
 struct NewsListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsListRowView()
+        NewsListRowView(article: ArticleViewModel())
     }
 }

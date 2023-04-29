@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TopHeadLinesView: View {
+    @EnvironmentObject var topHeadlinesViewModel: TopHeadlinesViewModel
+    
     @State private var selectedIndex: Int = 0
     var body: some View {
         NavigationStack {
@@ -33,18 +35,7 @@ struct TopHeadLinesView: View {
                         .padding(.trailing, 20)
                 }
                 
-                List {
-                    ForEach(0..<10, id: \.self) { index in
-                           NewsListRowView()
-                            .onTapGesture {
-                                selectedIndex = index
-                            }
-                            .listRowBackground(selectedIndex == index ? Color.secondary.opacity(0.3) : DefaultTheme.backgroundPrimary)
-                    }
-                    .listRowSeparator(.visible)
-                }
-                .scrollIndicators(.hidden)
-                .listStyle(.inset)
+                NewsListView()
                 
             }
         }
@@ -59,5 +50,6 @@ struct TopHeadLinesView: View {
 struct TopHeadLinesView_Previews: PreviewProvider {
     static var previews: some View {
         TopHeadLinesView()
+            .environmentObject(TopHeadlinesViewModel())
     }
 }

@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct MainView: View {
+    @StateObject var topheadlinesViewModel = TopHeadlinesViewModel()
     @State private var selectedTab: Int = 1
     var body: some View {
             TabView(selection: $selectedTab) {
-                
                 TopHeadLinesView()
                     .tag(1)
+                    .environmentObject(topheadlinesViewModel)
                 TabItemView(title: "Categories", systemIconName: "newspaper", selectedTab: $selectedTab)
                     .tag(2)
                 TabItemView(title: "Media", systemIconName: "globe", selectedTab: $selectedTab)

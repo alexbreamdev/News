@@ -76,3 +76,7 @@ struct ArticleViewModel: Identifiable {
         return ArticleViewModel()
     }
 }
+
+extension ArticleViewModel: Equatable {
+    
+}
