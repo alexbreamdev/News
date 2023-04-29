@@ -15,6 +15,9 @@
 		2F89E77129FD397700545DC5 /* NewsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E77029FD397700545DC5 /* NewsListRowView.swift */; };
 		2F89E77329FD3B2400545DC5 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E77229FD3B2400545DC5 /* Bundle+Extension.swift */; };
 		2F89E77529FD3B5800545DC5 /* ArticleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E77429FD3B5800545DC5 /* ArticleWebView.swift */; };
+		2F89E77929FD5B7C00545DC5 /* MockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E77829FD5B7C00545DC5 /* MockService.swift */; };
+		2F89E77B29FD5C1300545DC5 /* TopHeadlineResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E77A29FD5C1300545DC5 /* TopHeadlineResults.swift */; };
+		2F89E77D29FD621700545DC5 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E77C29FD621700545DC5 /* Date+Extension.swift */; };
 		2FAA6B8A29FD1A65004DE60A /* NewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8929FD1A65004DE60A /* NewsApp.swift */; };
 		2FAA6B8C29FD1A65004DE60A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8B29FD1A65004DE60A /* MainView.swift */; };
 		2FAA6B8E29FD1A66004DE60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8D29FD1A66004DE60A /* Assets.xcassets */; };
@@ -30,6 +33,9 @@
 		2F89E77029FD397700545DC5 /* NewsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListRowView.swift; sourceTree = "<group>"; };
 		2F89E77229FD3B2400545DC5 /* Bundle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		2F89E77429FD3B5800545DC5 /* ArticleWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleWebView.swift; sourceTree = "<group>"; };
+		2F89E77829FD5B7C00545DC5 /* MockService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockService.swift; sourceTree = "<group>"; };
+		2F89E77A29FD5C1300545DC5 /* TopHeadlineResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopHeadlineResults.swift; sourceTree = "<group>"; };
+		2F89E77C29FD621700545DC5 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		2FAA6B8629FD1A65004DE60A /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FAA6B8929FD1A65004DE60A /* NewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApp.swift; sourceTree = "<group>"; };
 		2FAA6B8B29FD1A65004DE60A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -77,6 +83,7 @@
 		2F89E76029FD1CF500545DC5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2F89E77A29FD5C1300545DC5 /* TopHeadlineResults.swift */,
 				2F89E76A29FD299100545DC5 /* topheadlinesusa.json */,
 			);
 			path = Models;
@@ -85,6 +92,7 @@
 		2F89E76129FD1D0300545DC5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2F89E77829FD5B7C00545DC5 /* MockService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -93,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				2F89E77229FD3B2400545DC5 /* Bundle+Extension.swift */,
+				2F89E77C29FD621700545DC5 /* Date+Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -235,8 +244,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F89E76D29FD2C8100545DC5 /* TopHeadLinesView.swift in Sources */,
+				2F89E77B29FD5C1300545DC5 /* TopHeadlineResults.swift in Sources */,
+				2F89E77929FD5B7C00545DC5 /* MockService.swift in Sources */,
 				2F89E76529FD21AE00545DC5 /* Theme.swift in Sources */,
 				2F89E77529FD3B5800545DC5 /* ArticleWebView.swift in Sources */,
+				2F89E77D29FD621700545DC5 /* Date+Extension.swift in Sources */,
 				2F89E76929FD271200545DC5 /* TabItemView.swift in Sources */,
 				2F89E77329FD3B2400545DC5 /* Bundle+Extension.swift in Sources */,
 				2FAA6B8C29FD1A65004DE60A /* MainView.swift in Sources */,
