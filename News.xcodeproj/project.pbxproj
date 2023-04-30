@@ -24,6 +24,7 @@
 		2FAA6B8C29FD1A65004DE60A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8B29FD1A65004DE60A /* MainView.swift */; };
 		2FAA6B8E29FD1A66004DE60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8D29FD1A66004DE60A /* Assets.xcassets */; };
 		2FAA6B9129FD1A66004DE60A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FAA6B9029FD1A66004DE60A /* Preview Assets.xcassets */; };
+		2FB4BF4729FE72CE00FF4FDD /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB4BF4629FE72CE00FF4FDD /* Categories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		2FAA6B8B29FD1A65004DE60A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2FAA6B8D29FD1A66004DE60A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FAA6B9029FD1A66004DE60A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2FB4BF4629FE72CE00FF4FDD /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			children = (
 				2F89E77A29FD5C1300545DC5 /* TopHeadlineResults.swift */,
 				2F89E76A29FD299100545DC5 /* topheadlinesusa.json */,
+				2FB4BF4629FE72CE00FF4FDD /* Categories.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			files = (
 				2F89E76D29FD2C8100545DC5 /* TopHeadLinesView.swift in Sources */,
 				2F89E77B29FD5C1300545DC5 /* TopHeadlineResults.swift in Sources */,
+				2FB4BF4729FE72CE00FF4FDD /* Categories.swift in Sources */,
 				2F89E77929FD5B7C00545DC5 /* MockService.swift in Sources */,
 				2F89E78129FD710E00545DC5 /* NewsListView.swift in Sources */,
 				2F89E76529FD21AE00545DC5 /* Theme.swift in Sources */,
