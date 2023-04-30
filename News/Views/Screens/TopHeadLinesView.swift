@@ -14,6 +14,15 @@ struct TopHeadLinesView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 15) {
+                HStack {
+                    Text("See more")
+                        .multilineTextAlignment(.trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .foregroundColor(DefaultTheme.tintColor)
+                        .fontWeight(.semibold)
+                        .padding(.trailing, 20)
+                }
+                
                 RoundedRectangle(cornerRadius: 10)
                     .frame(height: 250)
                     .padding(.horizontal)
@@ -25,15 +34,6 @@ struct TopHeadLinesView: View {
                 
                 
                 CategoryListRoulette()
-                
-                HStack {
-                    Text("See more")
-                        .multilineTextAlignment(.trailing)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .foregroundColor(DefaultTheme.tintColor)
-                        .fontWeight(.semibold)
-                        .padding(.trailing, 20)
-                }
                 
                 NewsListView()
                 

@@ -14,7 +14,7 @@ struct NewsListView: View {
         List {
             ForEach(topHeadlinesVM.articles) { article in
                 NewsListRowView(article: article)
-                    .frame(height: 80)
+                    .frame(height: 120)
                     .onTapGesture {
                         topHeadlinesVM.mainArticle = article
                     }

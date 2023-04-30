@@ -15,7 +15,7 @@ struct NewsListRowView: View {
         HStack(alignment: .top) {
             
             RoundedRectangle(cornerRadius: 5)
-                .frame(width: 60, height: 60)
+                .frame(width: 100, height: 100)
                 .overlay {
                     Text("Image here").foregroundColor(.white)
                 }
