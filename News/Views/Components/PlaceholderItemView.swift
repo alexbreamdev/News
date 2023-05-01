@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabItemView: View {
+struct PlaceholderItemView: View {
     var title: String
     var systemIconName: String
     @Binding var selectedTab: Int
@@ -31,6 +31,6 @@ struct TabItemView: View {
 
 struct TabItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TabItemView(title: "Hot", systemIconName: "flame", selectedTab: .constant(1))
+        PlaceholderItemView(title: "Hot", systemIconName: "flame", selectedTab: .constant(1))
     }
 }

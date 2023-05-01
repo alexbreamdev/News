@@ -14,11 +14,7 @@ struct NewsListRowView: View {
     var body: some View {
         HStack(alignment: .top) {
             
-            RoundedRectangle(cornerRadius: 5)
-                .frame(width: 100, height: 100)
-                .overlay {
-                    Text("Image here").foregroundColor(.white)
-                }
+            AsyncImageView(urlString: article.urlToImage)
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack {

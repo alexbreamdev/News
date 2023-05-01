@@ -9,20 +9,22 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var topheadlinesViewModel = TopHeadlinesViewModel()
-    @State private var selectedTab: Int = 1
+    @AppStorage("tab") private var selectedTab: Int = 0
+    
     var body: some View {
             TabView(selection: $selectedTab) {
-                TabItemView(title: "Home", systemIconName: "house", selectedTab: $selectedTab)
-                TopHeadLinesView()
+                HomeView()
                     .tag(1)
+                
+                TopHeadLinesView()
                     .environmentObject(topheadlinesViewModel)
                     .tag(2)
-                TabItemView(title: "Discover", systemIconName: "safari", selectedTab: $selectedTab)
-                    .tag(2)
-                TabItemView(title: "Bookmark", systemIconName: "bookmark", selectedTab: $selectedTab)
-                    .tag(2)
-                TabItemView(title: "Settings", systemIconName: "gearshape", selectedTab: $selectedTab)
+                PlaceholderItemView(title: "Discover", systemIconName: "safari", selectedTab: $selectedTab)
                     .tag(3)
+                PlaceholderItemView(title: "Bookmark", systemIconName: "bookmark", selectedTab: $selectedTab)
+                    .tag(4)
+                PlaceholderItemView(title: "Settings", systemIconName: "gearshape", selectedTab: $selectedTab)
+                    .tag(5)
             }
             .tint(DefaultTheme.tintColor)
     }

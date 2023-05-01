@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F73321C29FFD47C00D9EA80 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F73321B29FFD47C00D9EA80 /* HomeView.swift */; };
+		2F73321E29FFDC3400D9EA80 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F73321D29FFDC3400D9EA80 /* AsyncImageView.swift */; };
 		2F89E76529FD21AE00545DC5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E76429FD21AE00545DC5 /* Theme.swift */; };
-		2F89E76929FD271200545DC5 /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E76829FD271200545DC5 /* TabItemView.swift */; };
+		2F89E76929FD271200545DC5 /* PlaceholderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E76829FD271200545DC5 /* PlaceholderItemView.swift */; };
 		2F89E76B29FD299100545DC5 /* topheadlinesusa.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F89E76A29FD299100545DC5 /* topheadlinesusa.json */; };
 		2F89E76D29FD2C8100545DC5 /* TopHeadLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E76C29FD2C8100545DC5 /* TopHeadLinesView.swift */; };
 		2F89E76F29FD2E8E00545DC5 /* CategoryListRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E76E29FD2E8E00545DC5 /* CategoryListRoulette.swift */; };
@@ -28,8 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F73321B29FFD47C00D9EA80 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2F73321D29FFDC3400D9EA80 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		2F89E76429FD21AE00545DC5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		2F89E76829FD271200545DC5 /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
+		2F89E76829FD271200545DC5 /* PlaceholderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderItemView.swift; sourceTree = "<group>"; };
 		2F89E76A29FD299100545DC5 /* topheadlinesusa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topheadlinesusa.json; sourceTree = "<group>"; };
 		2F89E76C29FD2C8100545DC5 /* TopHeadLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadLinesView.swift; sourceTree = "<group>"; };
 		2F89E76E29FD2E8E00545DC5 /* CategoryListRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListRoulette.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 			children = (
 				2FAA6B8B29FD1A65004DE60A /* MainView.swift */,
 				2F89E76C29FD2C8100545DC5 /* TopHeadLinesView.swift */,
+				2F73321B29FFD47C00D9EA80 /* HomeView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -135,10 +140,11 @@
 			isa = PBXGroup;
 			children = (
 				2F89E77429FD3B5800545DC5 /* ArticleWebView.swift */,
-				2F89E76829FD271200545DC5 /* TabItemView.swift */,
+				2F89E76829FD271200545DC5 /* PlaceholderItemView.swift */,
 				2F89E76E29FD2E8E00545DC5 /* CategoryListRoulette.swift */,
 				2F89E77029FD397700545DC5 /* NewsListRowView.swift */,
 				2F89E78029FD710E00545DC5 /* NewsListView.swift */,
+				2F73321D29FFDC3400D9EA80 /* AsyncImageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -260,11 +266,13 @@
 				2F89E76529FD21AE00545DC5 /* Theme.swift in Sources */,
 				2F89E77529FD3B5800545DC5 /* ArticleWebView.swift in Sources */,
 				2F89E77D29FD621700545DC5 /* Date+Extension.swift in Sources */,
-				2F89E76929FD271200545DC5 /* TabItemView.swift in Sources */,
+				2F89E76929FD271200545DC5 /* PlaceholderItemView.swift in Sources */,
 				2F89E77F29FD666400545DC5 /* TopHeadlinesViewModel.swift in Sources */,
 				2F89E77329FD3B2400545DC5 /* Bundle+Extension.swift in Sources */,
 				2FAA6B8C29FD1A65004DE60A /* MainView.swift in Sources */,
 				2FAA6B8A29FD1A65004DE60A /* NewsApp.swift in Sources */,
+				2F73321E29FFDC3400D9EA80 /* AsyncImageView.swift in Sources */,
+				2F73321C29FFD47C00D9EA80 /* HomeView.swift in Sources */,
 				2F89E77129FD397700545DC5 /* NewsListRowView.swift in Sources */,
 				2F89E76F29FD2E8E00545DC5 /* CategoryListRoulette.swift in Sources */,
 			);

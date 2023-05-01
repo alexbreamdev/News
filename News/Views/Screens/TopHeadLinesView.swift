@@ -9,8 +9,6 @@ import SwiftUI
 
 struct TopHeadLinesView: View {
     @EnvironmentObject var topHeadlinesViewModel: TopHeadlinesViewModel
-    
-    @State private var selectedIndex: Int = 0
     var body: some View {
         NavigationStack {
             VStack(spacing: 15) {
