@@ -15,7 +15,13 @@ struct AsyncImageView: View {
             AsyncImage(url: url) { phase in
                 switch phase {
                 case .empty:
-                    ProgressView()
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(DefaultTheme.backgroundSecondary)
+                            .frame(width: 100, height: 100)
+                        ProgressView()
+                            .tint(DefaultTheme.tintColor)
+                    }
                 case .success(let image) :
                     image.resizable()
                         .scaledToFill()
@@ -23,9 +29,12 @@ struct AsyncImageView: View {
                         .cornerRadius(5)
                         .clipped()
                 case .failure :
-                    Image(systemName: "questionmark")
-                        .font(.headline)
-                    
+                    Image("placeholder")
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .cornerRadius(5)
+                        .clipped()
+
                 @unknown default:
                     fatalError()
                 }
