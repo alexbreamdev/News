@@ -12,14 +12,16 @@ struct MainView: View {
     @State private var selectedTab: Int = 1
     var body: some View {
             TabView(selection: $selectedTab) {
+                TabItemView(title: "Home", systemIconName: "house", selectedTab: $selectedTab)
                 TopHeadLinesView()
                     .tag(1)
                     .environmentObject(topheadlinesViewModel)
-                TabItemView(title: "Categories", systemIconName: "newspaper", selectedTab: $selectedTab)
                     .tag(2)
-                TabItemView(title: "Media", systemIconName: "globe", selectedTab: $selectedTab)
+                TabItemView(title: "Discover", systemIconName: "safari", selectedTab: $selectedTab)
                     .tag(2)
-                TabItemView(title: "Search", systemIconName: "magnifyingglass", selectedTab: $selectedTab)
+                TabItemView(title: "Bookmark", systemIconName: "bookmark", selectedTab: $selectedTab)
+                    .tag(2)
+                TabItemView(title: "Settings", systemIconName: "gearshape", selectedTab: $selectedTab)
                     .tag(3)
             }
             .tint(DefaultTheme.tintColor)

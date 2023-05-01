@@ -8,20 +8,33 @@
 import SwiftUI
 
 struct CategoryListRoulette: View {
+    @State private var selectedCategory: Category = .all
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(0..<20, id: \.self) { _ in
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 150, height: 44)
-                        .overlay(alignment: .center) {
-                            Text("category name")
-                                .foregroundColor(.white)
+                ForEach(Category.allCases, id: \.rawValue) { category in
+                    CategoryView(category: category, selected: selectedCategory == category)
+                        .onTapGesture {
+                            selectedCategory = category
                         }
                 }
             }
             .padding(.horizontal)
         }
+    }
+}
+
+struct CategoryView: View {
+    let category: Category
+    let selected: Bool
+    
+    var body: some View {
+        Text(category.categoryLabel)
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .padding()
+            .background(selected ? DefaultTheme.tintColor.opacity(0.7) : DefaultTheme.backgroundSecondary)
+            .cornerRadius(20)
     }
 }
 

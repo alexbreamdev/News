@@ -22,7 +22,7 @@ struct NewsListRowView: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack {
-                    Text("\("CATEGORY")")
+                    Text("\("📰 CNN")")
                         .font(.caption2)
                         .fontWeight(.semibold)
                         .lineLimit(1)
