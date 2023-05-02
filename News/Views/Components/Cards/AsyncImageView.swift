@@ -20,6 +20,8 @@ struct AsyncImageView: View {
                             .fill(DefaultTheme.backgroundSecondary)
                             .frame(width: 100, height: 100)
                         ProgressView()
+                            .progressViewStyle(.automatic)
+                            .scaleEffect(1.5, anchor: .center)
                             .tint(DefaultTheme.tintColor)
                     }
                 case .success(let image) :
@@ -38,7 +40,6 @@ struct AsyncImageView: View {
                 @unknown default:
                     fatalError()
                 }
-                
             }
         } else {
             Rectangle()
