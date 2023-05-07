@@ -18,7 +18,7 @@ struct AsyncImageView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .fill(DefaultTheme.backgroundSecondary)
-                            .frame(width: 100, height: 100)
+        
                         ProgressView()
                             .progressViewStyle(.automatic)
                             .scaleEffect(1.5, anchor: .center)
@@ -27,14 +27,10 @@ struct AsyncImageView: View {
                 case .success(let image) :
                     image.resizable()
                         .scaledToFill()
-                        .frame(width: 100, height: 100)
-                        .cornerRadius(5)
                         .clipped()
                 case .failure :
                     Image("placeholder")
                         .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        .cornerRadius(5)
                         .clipped()
 
                 @unknown default:
@@ -44,10 +40,6 @@ struct AsyncImageView: View {
         } else {
             Rectangle()
                 .fill(DefaultTheme.backgroundSecondary)
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-                .cornerRadius(5)
-            
         }
     }
 }
