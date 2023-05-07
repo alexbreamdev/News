@@ -9,27 +9,11 @@ import SwiftUI
 
 struct TopHeadLinesView: View {
     @EnvironmentObject var topHeadlinesViewModel: TopHeadlinesViewModel
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 15) {
-                HStack {
-                    Text("See more")
-                        .multilineTextAlignment(.trailing)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .foregroundColor(DefaultTheme.tintColor)
-                        .fontWeight(.semibold)
-                        .padding(.trailing, 20)
-                }
-                
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(height: 250)
-                    .padding(.horizontal)
-                    .overlay {
-                        Text("Recent")
-                            .font(.title)
-                            .foregroundColor(.white)
-                    }
-                
+                MainCardView(article: topHeadlinesViewModel.mainArticle)
                 
                 CategoryListRoulette()
                 
