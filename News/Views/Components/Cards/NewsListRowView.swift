@@ -15,6 +15,8 @@ struct NewsListRowView: View {
         HStack(alignment: .top) {
             
             AsyncImageView(urlString: article.urlToImage)
+                .frame(width: 100, height: 100)
+                .cornerRadius(5)
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack {
@@ -69,6 +71,6 @@ struct NewsListRowView: View {
 
 struct NewsListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsListRowView(article: ArticleViewModel())
+        NewsListRowView(article: ArticleViewModel(MockService.shared.articlesUSA[1])!)
     }
 }

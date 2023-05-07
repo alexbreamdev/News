@@ -29,8 +29,9 @@ struct AsyncImageView: View {
                         .scaledToFill()
                         .clipped()
                 case .failure :
-                    Image("placeholder")
-                        .scaledToFit()
+                    Image(systemName: "photo.fill")
+                        .resizable()
+                        .foregroundColor(DefaultTheme.tintColor.opacity(0.5))
                         .clipped()
 
                 @unknown default:
@@ -38,8 +39,10 @@ struct AsyncImageView: View {
                 }
             }
         } else {
-            Rectangle()
-                .fill(DefaultTheme.backgroundSecondary)
+            Image(systemName: "photo.fill")
+                .resizable()
+                .foregroundColor(DefaultTheme.tintColor.opacity(0.5))
+                .clipped()
         }
     }
 }
