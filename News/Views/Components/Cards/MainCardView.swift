@@ -9,28 +9,61 @@ import SwiftUI
 
 struct MainCardView: View {
     let article: ArticleViewModel
+    @State private var eyeAnimation: Bool = false
     
     var body: some View {
         AsyncImageView(urlString: article.urlToImage)
             .frame(width: UIScreen.main.bounds.width - 20, height: 250)
             .clipped()
             .cornerRadius(10)
+            .overlay(alignment: .topTrailing) {
+               eyeButton
+            }
             .overlay(alignment: .bottom) {
-                Text(article.title)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .lineLimit(2)
-                    .frame(maxWidth: .infinity)
-                    .padding(5)
-                    .background(DefaultTheme.backgroundPrimary)
+                articleTitleOverlay
             }
             .overlay {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(lineWidth: 2)
-                    .foregroundColor(DefaultTheme.backgroundSecondary)
+                thinBorderOverlay
             }
+            .onChange(of: article) { _ in
+                withAnimation(.spring(response: 0.5)) {
+                    eyeAnimation = true
+                }
+                eyeAnimation = false
+            }
+        
+        
+    }
+    
+    // MARK: - Main Card View Components
+    private var articleTitleOverlay: some View {
+        Text(article.title)
+            .font(.title2)
+            .fontWeight(.bold)
+            .lineLimit(2)
+            .frame(maxWidth: .infinity)
+            .multilineTextAlignment(.leading)
+            .padding(5)
+            .background(DefaultTheme.backgroundPrimary)
+    }
+    
+    private var thinBorderOverlay: some View {
+        RoundedRectangle(cornerRadius: 10)
+            .stroke(lineWidth: 2)
+            .foregroundColor(DefaultTheme.backgroundSecondary)
+    }
+    
+    private var eyeButton: some View {
+        Button {
             
-            
+        } label: {
+            Image(systemName: "eye.fill")
+                .font(.title2)
+                .foregroundColor(DefaultTheme.tintColor)
+                .padding(10)
+                .scaleEffect(eyeAnimation ? 1.2 : 0.7)
+                
+        }
     }
 }
 
