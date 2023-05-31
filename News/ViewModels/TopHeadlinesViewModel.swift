@@ -24,7 +24,7 @@ final class TopHeadlinesViewModel: ObservableObject {
     }
     
     private var page: Int = 1
-    private var pageSize: Int? = 5
+    private var pageSize: Int? = 10
     private var totalResults: Int = 0
     private var totalPages: Int? {
         if totalResults > 0, let pageSize = pageSize {
@@ -54,6 +54,7 @@ final class TopHeadlinesViewModel: ObservableObject {
                 self.mainArticle = self.articles.first!
             }
         } catch {
+
             self.hasError = true
             if let networkingError = error as? NetworkingService.NetworkingError {
                 self.error = networkingError

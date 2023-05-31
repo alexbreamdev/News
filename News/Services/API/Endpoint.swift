@@ -59,9 +59,9 @@ extension Endpoint {
         switch self {
         case .topHeadlines(let page, let pageSize):
             if let page = page, let pageSize = pageSize {
-                return ["page": "\(page)", "pageSize": "\(pageSize)", "apiKey": ""]
+                return ["page": "\(page)", "pageSize": "\(pageSize)", "country":"us", "apiKey": ApiKey.freeKey.rawValue]
             } else {
-                return ["apiKey": ""]
+                return ["apiKey": ApiKey.freeKey.rawValue]
             }
         default:
             return nil

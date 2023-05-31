@@ -15,6 +15,7 @@ class NetworkingService {
     
     // MARK: - Request async/avait
     func request<T: Codable>(_ endpoint: Endpoint, type: T.Type) async throws -> T {
+        print(endpoint.path)
         // create url from string
         guard let url = endpoint.url else {
             // throw error if url returns nill
