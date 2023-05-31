@@ -20,26 +20,34 @@ struct TopHeadLinesView: View {
                 NewsListView()
                 
             }
-            .alert(isPresented: $topHeadlinesViewModel.hasError, error: topHeadlinesViewModel.error) {
-                Button {
-                    Task {
-                        await topHeadlinesViewModel.getAllArticles()
-                    }
-                } label: {
-                    Text("Retry")
-                }
-                
-                Button(role: .cancel) {
-                   
-                } label: {
-                    Text("Cancel")
-                }
-            }
+        }
+        .alert(isPresented: $topHeadlinesViewModel.hasError, error: topHeadlinesViewModel.error) {
+            alertButton
         }
         .tabItem {
             Image(systemName: "flame")
             Text("Top Headlines")
                 .multilineTextAlignment(.center)
+        }
+    }
+}
+
+extension TopHeadLinesView {
+    
+    @ViewBuilder
+    var alertButton: some View {
+        Button {
+            Task {
+                await topHeadlinesViewModel.getAllArticles()
+            }
+        } label: {
+            Text("Retry")
+        }
+        
+        Button(role: .cancel) {
+            
+        } label: {
+            Text("Cancel")
         }
     }
 }

@@ -86,10 +86,6 @@ extension Endpoint {
         var requestQueryItems = queryItems?.compactMap { item in
             URLQueryItem(name: item.key, value: item.value)
         }
-        #if DEBUG
-        // query parameters (items) such as delay=3, pages
-        requestQueryItems?.append(URLQueryItem(name: "delay", value: "1"))
-        #endif
         urlComponents.queryItems = requestQueryItems
         return urlComponents.url
     }

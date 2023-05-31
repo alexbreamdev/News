@@ -15,7 +15,6 @@ class NetworkingService {
     
     // MARK: - Request async/avait
     func request<T: Codable>(_ endpoint: Endpoint, type: T.Type) async throws -> T {
-        print(endpoint.path)
         // create url from string
         guard let url = endpoint.url else {
             // throw error if url returns nill
@@ -88,7 +87,8 @@ extension NetworkingService.NetworkingError {
         case .invalidURL:
             return "URL isn't valid"
         case .custom(let error):
-            return "Something wrong. \(error)"
+            print(error)
+            return "Something wrong."
         case .invalidStatusCode(let statusCode):
             return "Status code: \(statusCode). Wrong response."
         case .invalidData:
