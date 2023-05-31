@@ -27,7 +27,7 @@ struct MainCardView: View {
                     eyeAnimation = false
                 }
             
-                articleTitleOverlay
+                articleTitle
         }
         .overlay {
             thinBorderOverlay
@@ -37,7 +37,7 @@ struct MainCardView: View {
     }
     
     // MARK: - Main Card View Components
-    private var articleTitleOverlay: some View {
+    private var articleTitle: some View {
         Text(article.title)
             .font(.title2)
             .fontWeight(.bold)
