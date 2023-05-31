@@ -20,6 +20,11 @@ struct NewsListView: View {
                             
                     }
                     .listRowBackground(topHeadlinesVM.mainArticle == article ? Color.secondary.opacity(0.3) : DefaultTheme.backgroundPrimary)
+                    .task {
+                        if topHeadlinesVM.hasReachedEnd(of: article) {
+                            await topHeadlinesVM.getSetOfArticles()
+                        }
+                    }
                     
             }
             .listRowSeparator(.visible)

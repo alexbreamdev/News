@@ -69,7 +69,6 @@ final class TopHeadlinesViewModel: ObservableObject {
             return
         }
         
-        
         viewState = .loading
         // reset isLoading status when everything is executed
         defer {
@@ -113,6 +112,10 @@ final class TopHeadlinesViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func hasReachedEnd(of article: ArticleViewModel) -> Bool {
+        return articles.last?.id == article.id
     }
 }
 
