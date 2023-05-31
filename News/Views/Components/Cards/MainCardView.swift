@@ -12,26 +12,27 @@ struct MainCardView: View {
     @State private var eyeAnimation: Bool = false
     
     var body: some View {
-        AsyncImageView(urlString: article.urlToImage)
-            .frame(width: UIScreen.main.bounds.width - 20, height: 250)
-            .clipped()
-            .cornerRadius(10)
-            .overlay(alignment: .topTrailing) {
-               eyeButton
-            }
-            .overlay(alignment: .bottom) {
-                articleTitleOverlay
-            }
-            .overlay {
-                thinBorderOverlay
-            }
-            .onChange(of: article) { _ in
-                withAnimation(.spring(response: 0.5)) {
-                    eyeAnimation = true
+        ZStack(alignment: .bottom) {
+            AsyncImageView(urlString: article.urlToImage)
+                .frame(width: UIScreen.main.bounds.width - 20, height: 250)
+                .clipped()
+                .cornerRadius(10)
+                .overlay(alignment: .topTrailing) {
+                    eyeButton
                 }
-                eyeAnimation = false
-            }
-        
+                .onChange(of: article) { _ in
+                    withAnimation(.spring(response: 0.5)) {
+                        eyeAnimation = true
+                    }
+                    eyeAnimation = false
+                }
+            
+                articleTitleOverlay
+        }
+        .overlay {
+            thinBorderOverlay
+        }
+        .padding(.horizontal)
         
     }
     
@@ -44,6 +45,7 @@ struct MainCardView: View {
             .frame(maxWidth: .infinity)
             .multilineTextAlignment(.leading)
             .padding(5)
+            .padding(.horizontal, 3)
             .background(DefaultTheme.backgroundPrimary)
     }
     
@@ -51,6 +53,8 @@ struct MainCardView: View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(lineWidth: 2)
             .foregroundColor(DefaultTheme.backgroundSecondary)
+            .shadow(color: DefaultTheme.backgroundSecondary, radius: 4, x: 0, y: 4)
+            
     }
     
     private var eyeButton: some View {

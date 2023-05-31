@@ -16,9 +16,9 @@ struct NewsListView: View {
                 NewsListRowView(article: article)
                     .frame(height: 120)
                     .onTapGesture {
-                        topHeadlinesVM.mainArticle = article
+                            topHeadlinesVM.mainArticle = article
+                            
                     }
-
                     .listRowBackground(topHeadlinesVM.mainArticle == article ? Color.secondary.opacity(0.3) : DefaultTheme.backgroundPrimary)
                     
             }
