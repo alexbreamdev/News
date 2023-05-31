@@ -15,6 +15,7 @@ final class TopHeadlinesViewModel: ObservableObject {
     @Published var error: NetworkingService.NetworkingError?
     @Published var hasError: Bool = false
     @Published var viewState: ViewState?
+    @Published var category: Category = .all
     
     var isLoading: Bool {
         viewState == .loading
@@ -48,7 +49,7 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
         
         do {
-            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize), type: TopHeadlinesResult.self)
+            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize, category: category), type: TopHeadlinesResult.self)
             totalResults = result.totalResults
             self.articles = result.articles.compactMap { article -> ArticleViewModel? in
                 return ArticleViewModel(article)
@@ -81,7 +82,7 @@ final class TopHeadlinesViewModel: ObservableObject {
         
         do {
             // request using endpoint and user
-            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize), type: TopHeadlinesResult.self)
+            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize, category: category), type: TopHeadlinesResult.self)
             totalResults = result.totalResults
             self.articles += result.articles.compactMap { article -> ArticleViewModel? in
                 return ArticleViewModel(article)

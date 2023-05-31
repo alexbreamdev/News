@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryListRoulette: View {
-    @State private var selectedCategory: Category = .all
+    @Binding var selectedCategory: Category
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
@@ -40,7 +40,7 @@ struct CategoryView: View {
 
 struct CategoryListRoulette_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryListRoulette()
+        CategoryListRoulette(selectedCategory: .constant(.all))
        
     }
 }

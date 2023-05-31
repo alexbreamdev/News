@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NewsListView: View {
-    @EnvironmentObject var topHeadlinesVM: TopHeadlinesViewModel
+    @EnvironmentObject private var topHeadlinesVM: TopHeadlinesViewModel
+    @State private var task: Task<Void, Never>?
    
     var body: some View {
         List {
@@ -35,6 +36,14 @@ struct NewsListView: View {
         .listStyle(.inset)
         .task {
             await topHeadlinesVM.getAllArticles()
+        }
+        .onChange(of: topHeadlinesVM.category) { _ in
+            task = Task {
+                await topHeadlinesVM.getAllArticles()
+            }
+        }
+        .onDisappear {
+            task?.cancel()
         }
     }
 }

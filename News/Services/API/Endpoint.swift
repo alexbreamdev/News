@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Way to interact with API endpoints, using enum, query
 enum Endpoint {
     // to PeopleView // page is using query parameter to make pagination
-    case topHeadlines(page: Int?, pageSize: Int?)
+    case topHeadlines(page: Int?, pageSize: Int?, category: Category)
     
     // to DetailView
     case detail(id: Int)
@@ -57,12 +57,18 @@ extension Endpoint {
     // query items
     var queryItems: [String: String]? {
         switch self {
-        case .topHeadlines(let page, let pageSize):
+        case .topHeadlines(let page, let pageSize, let category):
+            var topHeadlinesQueryItems = ["apiKey": ApiKey.freeKey.rawValue, "country" : "us"]
             if let page = page, let pageSize = pageSize {
-                return ["page": "\(page)", "pageSize": "\(pageSize)", "country":"us", "apiKey": ApiKey.freeKey.rawValue]
-            } else {
-                return ["apiKey": ApiKey.freeKey.rawValue]
+                topHeadlinesQueryItems.updateValue("\(page)", forKey: "page")
+                topHeadlinesQueryItems.updateValue("\(pageSize)", forKey: "pageSize")
             }
+            
+            if category != .all {
+                topHeadlinesQueryItems.updateValue(category.rawValue, forKey: "category")
+            }
+            
+            return topHeadlinesQueryItems
         default:
             return nil
         }

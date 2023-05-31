@@ -15,7 +15,7 @@ struct TopHeadLinesView: View {
             VStack(spacing: 15) {
                 MainCardView(article: topHeadlinesViewModel.mainArticle)
                 
-                CategoryListRoulette()
+                CategoryListRoulette(selectedCategory: $topHeadlinesViewModel.category)
                 
                 NewsListView()
                 
