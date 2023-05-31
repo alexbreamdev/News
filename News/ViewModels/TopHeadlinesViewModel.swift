@@ -36,15 +36,14 @@ final class TopHeadlinesViewModel: ObservableObject {
     
     func getAllArticles() async {
         reset()
-        // set status is loading
+
         viewState = .loading
-        // reset isLoading status when everything is executed
+
         defer {
             viewState = .finished
         }
         
         do {
-            // request using endpoint and user
             let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize), type: TopHeadlinesResult.self)
             totalResults = result.totalResults
             self.articles = result.articles.compactMap { article -> ArticleViewModel? in
