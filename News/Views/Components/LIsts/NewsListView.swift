@@ -16,17 +16,26 @@ struct NewsListView: View {
                 NewsListRowView(article: article)
                     .frame(height: 120)
                     .onTapGesture {
-                        topHeadlinesVM.mainArticle = article
+                            topHeadlinesVM.mainArticle = article
+                            
                     }
-
                     .listRowBackground(topHeadlinesVM.mainArticle == article ? Color.secondary.opacity(0.3) : DefaultTheme.backgroundPrimary)
+                    .task {
+                        if topHeadlinesVM.hasReachedEnd(of: article) {
+                            await topHeadlinesVM.getSetOfArticles()
+                        }
+                    }
                     
             }
             .listRowSeparator(.visible)
             .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+            .animation(.easeOut(duration: 2), value: topHeadlinesVM.mainArticle)
         }
         .scrollIndicators(.hidden)
         .listStyle(.inset)
+        .task {
+            await topHeadlinesVM.getAllArticles()
+        }
     }
 }
 

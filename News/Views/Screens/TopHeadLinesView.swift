@@ -20,6 +20,21 @@ struct TopHeadLinesView: View {
                 NewsListView()
                 
             }
+            .alert(isPresented: $topHeadlinesViewModel.hasError, error: topHeadlinesViewModel.error) {
+                Button {
+                    Task {
+                        await topHeadlinesViewModel.getAllArticles()
+                    }
+                } label: {
+                    Text("Retry")
+                }
+                
+                Button(role: .cancel) {
+                   
+                } label: {
+                    Text("Cancel")
+                }
+            }
         }
         .tabItem {
             Image(systemName: "flame")
