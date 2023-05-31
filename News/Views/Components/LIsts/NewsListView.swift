@@ -24,9 +24,13 @@ struct NewsListView: View {
             }
             .listRowSeparator(.visible)
             .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+            .animation(.easeOut(duration: 2), value: topHeadlinesVM.mainArticle)
         }
         .scrollIndicators(.hidden)
         .listStyle(.inset)
+        .task {
+            await topHeadlinesVM.getAllArticles()
+        }
     }
 }
 
