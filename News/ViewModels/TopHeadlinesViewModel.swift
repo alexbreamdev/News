@@ -16,12 +16,16 @@ final class TopHeadlinesViewModel: ObservableObject {
     @Published var hasError: Bool = false
     @Published var viewState: ViewState?
     
+    var isLoading: Bool {
+        viewState == .loading
+    }
+    
+    var isFetching: Bool {
+        viewState == .fetching
+    }
+    
     let dataSevice = MockService.shared
     var cancellables = Set<AnyCancellable>()
-    
-    init() {
-//        getAllArticles()
-    }
     
     private var page: Int = 1
     private var pageSize: Int? = 10
@@ -53,7 +57,6 @@ final class TopHeadlinesViewModel: ObservableObject {
                 self.mainArticle = self.articles.first!
             }
         } catch {
-
             self.hasError = true
             if let networkingError = error as? NetworkingService.NetworkingError {
                 self.error = networkingError
@@ -68,8 +71,8 @@ final class TopHeadlinesViewModel: ObservableObject {
             return
         }
         
-        viewState = .loading
-        // reset isLoading status when everything is executed
+        viewState = .fetching
+        
         defer {
             viewState = .finished
         }

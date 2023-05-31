@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
-
+#warning("check CachedAsyncImage memory usage")
 struct AsyncImageView: View {
     let urlString: String
     
     var body: some View {
         if let url = URL(string: urlString) {
-            AsyncImage(url: url) { phase in
+            CachedAsyncImage(url: url, urlCache: .imageCache) { phase in
                 switch phase {
                 case .empty:
                     ZStack {
@@ -45,6 +45,10 @@ struct AsyncImageView: View {
                 .clipped()
         }
     }
+}
+
+extension URLCache {
+    static let imageCache = URLCache(memoryCapacity: 100*1000*1000, diskCapacity: 500*1000*1000)
 }
 
 struct AsyncImageView_Previews: PreviewProvider {
