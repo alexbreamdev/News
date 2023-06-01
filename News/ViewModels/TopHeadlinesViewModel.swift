@@ -129,6 +129,7 @@ struct ArticleViewModel: Identifiable {
     let title: String
     let url: String
     let urlToImage: String
+    let sourceName: String
     private let publishedAt: Date
     
     var publishedDate: String {
@@ -144,6 +145,7 @@ struct ArticleViewModel: Identifiable {
         self.title = "Placeholder"
         self.url = ""
         self.urlToImage = ""
+        self.sourceName = "CNN"
         self.publishedAt = Date.now
     }
     
@@ -152,6 +154,7 @@ struct ArticleViewModel: Identifiable {
         if article.title == nil { return nil }
         self.title = article.title!
         self.url = article.url
+        self.sourceName = article.source.name
         self.urlToImage = article.urlToImage ?? ""
         self.publishedAt = article.publishedAt
     }

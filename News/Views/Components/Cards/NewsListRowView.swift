@@ -22,7 +22,7 @@ struct NewsListRowView: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack {
-                    Text("\("📰 CNN")")
+                    Text("\(article.sourceName)")
                         .font(.caption2)
                         .fontWeight(.semibold)
                         .lineLimit(1)
@@ -35,7 +35,7 @@ struct NewsListRowView: View {
                         .foregroundColor(.secondary)
                         .fontWeight(.semibold)
                         .font(.caption)
-                       
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 
                 Text(article.title)
@@ -44,28 +44,7 @@ struct NewsListRowView: View {
                     .multilineTextAlignment(.leading)
             }
             .padding(.horizontal, 5)
-            Spacer(minLength: 30)
-            
-            Rectangle()
-                .frame(width: 30, height: 30)
-                .foregroundColor(Color.clear)
-                .allowsHitTesting(false)
-                .overlay(alignment: .trailing) {
-                        Image(systemName: "ellipsis")
-                            .font(.title3)
-                            .foregroundColor(menuPressed ? Color.yellow : Color.primary)
-                            .frame(width: 30, height: 30)
-                            .rotationEffect(.degrees(90))
-                            .allowsHitTesting(true)
-                            .onTapGesture {
-                                withAnimation {
-                                    menuPressed.toggle()
-                                    
-                                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in menuPressed.toggle()}
-                                }
-                                print("Pressed button")
-                            }
-                }
+//            Spacer(minLength: 20)
          
         }
         .overlay {
