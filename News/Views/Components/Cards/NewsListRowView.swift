@@ -10,6 +10,8 @@ import SwiftUI
 struct NewsListRowView: View {
     let article: ArticleViewModel
     @State private var menuPressed: Bool = false
+    let isSelected: Bool
+    let namespace: Namespace.ID
     
     var body: some View {
         HStack(alignment: .top) {
@@ -66,11 +68,22 @@ struct NewsListRowView: View {
                 }
          
         }
+        .overlay {
+            if isSelected {
+                Rectangle()
+                    .fill(DefaultTheme.tintColor.opacity(0.2))
+                    .frame(height: 120)
+                    .frame(maxWidth: .infinity)
+                    .matchedGeometryEffect(id: "row", in: namespace)
+                    .allowsHitTesting(false)
+            }
+        }
     }
 }
 
 struct NewsListRowView_Previews: PreviewProvider {
+    @Namespace static var namespace
     static var previews: some View {
-        NewsListRowView(article: ArticleViewModel(MockService.shared.articlesUSA[1])!)
+        NewsListRowView(article: ArticleViewModel(MockService.shared.articlesUSA[1])!, isSelected: true, namespace: namespace)
     }
 }

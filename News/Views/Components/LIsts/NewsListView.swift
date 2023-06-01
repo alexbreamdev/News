@@ -10,17 +10,19 @@ import SwiftUI
 struct NewsListView: View {
     @EnvironmentObject private var topHeadlinesVM: TopHeadlinesViewModel
     @State private var task: Task<Void, Never>?
-   
+    @Namespace var namespace
+    
     var body: some View {
         List {
             ForEach(topHeadlinesVM.articles) { article in
-                NewsListRowView(article: article)
+                NewsListRowView(article: article, isSelected: article == topHeadlinesVM.mainArticle, namespace: namespace)
                     .frame(height: 120)
                     .onTapGesture {
+                        withAnimation {
                             topHeadlinesVM.mainArticle = article
-                            
+                        }
                     }
-                    .listRowBackground(topHeadlinesVM.mainArticle == article ? Color.secondary.opacity(0.3) : DefaultTheme.backgroundPrimary)
+                    .listRowBackground(DefaultTheme.backgroundPrimary)
                     .task {
                         if topHeadlinesVM.hasReachedEnd(of: article) {
                             await topHeadlinesVM.getSetOfArticles()
@@ -30,7 +32,7 @@ struct NewsListView: View {
             }
             .listRowSeparator(.visible)
             .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-            .animation(.easeOut(duration: 2), value: topHeadlinesVM.mainArticle)
+
         }
         .scrollIndicators(.hidden)
         .listStyle(.inset)
@@ -38,14 +40,12 @@ struct NewsListView: View {
             await topHeadlinesVM.getAllArticles()
         }
         .onChange(of: topHeadlinesVM.category) { _ in
-        
             task = Task {
                 try? await Task.sleep(nanoseconds: 500_000_000)
                 await topHeadlinesVM.getAllArticles()
             }
         }
         .onDisappear {
-            
             task?.cancel()
         }
     }
