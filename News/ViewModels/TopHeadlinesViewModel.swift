@@ -39,6 +39,13 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
     }
     
+    func getAllArticles(_ isDebug: Bool = false) async {
+        if isDebug {
+            getAllArticlesMock()
+        } else {
+           await getAllArticles()
+        }
+    }
     // initial api call
     func getAllArticles() async {
         reset()
@@ -100,7 +107,8 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
     }
     // mock function
-    func getAllArticles() {
+    func getAllArticlesMock() {
+        viewState = .loading
         dataSevice.$articlesUSA
             .map { article -> [ArticleViewModel] in
                 article
@@ -108,12 +116,14 @@ final class TopHeadlinesViewModel: ObservableObject {
                         ArticleViewModel($0)
                     }
             }
+            .delay(for: 3, scheduler: RunLoop.main)
             .sink { [weak self] returnedArticles in
                 if let self = self {
                     self.articles = returnedArticles
                     if self.articles.count > 0 {
                         mainArticle = self.articles[0]
                     }
+                    self.viewState = .finished
                 }
             }
             .store(in: &cancellables)

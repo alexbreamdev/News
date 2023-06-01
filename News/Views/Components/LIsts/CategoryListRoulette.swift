@@ -37,7 +37,7 @@ struct CategoryView: View {
         Text(category.categoryLabel.uppercased())
             .font(.subheadline)
             .fontWeight(.semibold)
-            .padding(.vertical, 8)
+            .padding(.vertical, 7)
             .padding(.horizontal)
             .background {
                 if selected {
@@ -46,9 +46,10 @@ struct CategoryView: View {
                         .matchedGeometryEffect(id: "Selected", in: namespace, isSource: selected)
                 } else {
                     Capsule()
-                        .fill(DefaultTheme.backgroundSecondary)
+                        .stroke(DefaultTheme.tintColor, lineWidth: 1)
                 }
             }
+            .padding(.vertical, 1)
     }
 }
 

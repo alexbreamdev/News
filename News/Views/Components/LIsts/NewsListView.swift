@@ -9,7 +9,6 @@ import SwiftUI
 
 struct NewsListView: View {
     @EnvironmentObject private var topHeadlinesVM: TopHeadlinesViewModel
-    @State private var task: Task<Void, Never>?
     @Namespace var namespace
     
     var body: some View {
@@ -36,18 +35,7 @@ struct NewsListView: View {
         }
         .scrollIndicators(.hidden)
         .listStyle(.inset)
-        .task {
-            await topHeadlinesVM.getAllArticles()
-        }
-        .onChange(of: topHeadlinesVM.category) { _ in
-            task = Task {
-                try? await Task.sleep(nanoseconds: 500_000_000)
-                await topHeadlinesVM.getAllArticles()
-            }
-        }
-        .onDisappear {
-            task?.cancel()
-        }
+      
     }
 }
 
@@ -55,5 +43,6 @@ struct NewsListView_Previews: PreviewProvider {
     static var previews: some View {
         NewsListView()
             .environmentObject(TopHeadlinesViewModel())
+
     }
 }

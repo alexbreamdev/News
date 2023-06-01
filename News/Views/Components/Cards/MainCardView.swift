@@ -17,8 +17,9 @@ struct MainCardView: View {
                 .frame(width: UIScreen.main.bounds.width - 20, height: 250)
                 .clipped()
                 .cornerRadius(10)
-                .overlay(alignment: .topTrailing) {
+                .overlay(alignment: .bottomTrailing) {
                     eyeButton
+                        .padding(.bottom, 70)
                 }
                 .onChange(of: article) { _ in
                     withAnimation(.spring(response: 0.5)) {
@@ -42,7 +43,8 @@ struct MainCardView: View {
             .font(.title2)
             .fontWeight(.bold)
             .lineLimit(2)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(minHeight: 50, alignment: .top)
             .multilineTextAlignment(.leading)
             .padding(5)
             .padding(.horizontal, 3)
@@ -54,7 +56,6 @@ struct MainCardView: View {
             .stroke(lineWidth: 2)
             .foregroundColor(DefaultTheme.backgroundSecondary)
             .shadow(color: DefaultTheme.backgroundSecondary, radius: 4, x: 0, y: 4)
-            
     }
     
     private var eyeButton: some View {
