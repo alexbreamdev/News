@@ -39,6 +39,7 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
     }
     
+    // initial api call
     func getAllArticles() async {
         reset()
 
@@ -67,6 +68,7 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
     }
     
+    // next page api call
     func getSetOfArticles() async {
         guard totalPages != nil, page != totalPages else {
             return
@@ -97,7 +99,7 @@ final class TopHeadlinesViewModel: ObservableObject {
             }
         }
     }
-    
+    // mock function
     func getAllArticles() {
         dataSevice.$articlesUSA
             .map { article -> [ArticleViewModel] in

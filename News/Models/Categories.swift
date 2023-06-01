@@ -18,7 +18,7 @@ import Foundation
  Note: you can't mix this param with the sources param.
  */
 
-enum Category: String, CaseIterable {
+enum Category: String, CaseIterable, Identifiable {
     case all
     case general
     case technology
@@ -26,6 +26,10 @@ enum Category: String, CaseIterable {
     case sports
     case health
     case science
+    
+    var id: String {
+        return self.rawValue
+    }
     
     var categoryLabel: String {
         switch self {

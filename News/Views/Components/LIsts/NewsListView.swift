@@ -38,11 +38,14 @@ struct NewsListView: View {
             await topHeadlinesVM.getAllArticles()
         }
         .onChange(of: topHeadlinesVM.category) { _ in
+        
             task = Task {
+                try? await Task.sleep(nanoseconds: 500_000_000)
                 await topHeadlinesVM.getAllArticles()
             }
         }
         .onDisappear {
+            
             task?.cancel()
         }
     }
