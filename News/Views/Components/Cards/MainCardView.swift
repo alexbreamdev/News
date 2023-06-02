@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainCardView: View {
     let article: ArticleViewModel
-    @State private var unfoldArticle: Bool = true
+    @State private var unfoldArticle: Bool = false
     @State private var eyeAnimation: Bool = false
     @Namespace var namespace
     

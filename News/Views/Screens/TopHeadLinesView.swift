@@ -15,8 +15,11 @@ struct TopHeadLinesView: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 15) {
-                    MainCardView(article: topHeadlinesViewModel.mainArticle)
-                        .animation(.easeInOut, value: topHeadlinesViewModel.mainArticle)
+                    NavigationLink {
+                        ArticleWebView(urlString: topHeadlinesViewModel.mainArticle.url)
+                    } label: {
+                        MainCardView(article: topHeadlinesViewModel.mainArticle)
+                    }
                     
                     CategoryListRoulette(selectedCategory: $topHeadlinesViewModel.category)
                     
@@ -35,12 +38,12 @@ struct TopHeadLinesView: View {
             alertButton
         }
         .task {
-            await topHeadlinesViewModel.getAllArticles(true)
+            await topHeadlinesViewModel.getAllArticles(false)
         }
         .onChange(of: topHeadlinesViewModel.category) { _ in
             task = Task {
                 try? await Task.sleep(nanoseconds: 500_000_000)
-                await topHeadlinesViewModel.getAllArticles(true)
+                await topHeadlinesViewModel.getAllArticles(false)
             }
         }
         .onDisappear {

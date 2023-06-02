@@ -10,23 +10,28 @@ import SwiftUI
 
 @MainActor
 struct ArticleWebView: UIViewRepresentable {
-   
-    typealias UIViewType = WKWebView
-
-    let webView: WKWebView
-    #warning("add config here")
+    let url: URL?
     init(urlString: String) {
-        webView = WKWebView(frame: .zero)
-        webView.scrollView.showsVerticalScrollIndicator = false
-        webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.load(URLRequest(url: URL(string: urlString)!))
+        self.url = URL(string: urlString)
     }
 
     func makeUIView(context: Context) -> WKWebView {
-        webView
+        // allow use javaScript
+        let preferences = WKWebpagePreferences()
+        preferences.allowsContentJavaScript = true
+        
+        let config = WKWebViewConfiguration()
+        config.defaultWebpagePreferences = preferences
+    
+        var webView = WKWebView(frame: .zero, configuration: config)
+        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.scrollView.contentInsetAdjustmentBehavior = .never
+        return webView
     }
     
-    func updateUIView(_ uiView: WKWebView, context: Context) {
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        guard let url = url else { return }
+        webView.load(URLRequest(url: url))
     }
 
 }
