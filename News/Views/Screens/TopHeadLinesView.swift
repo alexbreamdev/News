@@ -17,7 +17,6 @@ struct TopHeadLinesView: View {
                 VStack(spacing: 15) {
                     MainCardView(article: topHeadlinesViewModel.mainArticle)
                         .animation(.easeInOut, value: topHeadlinesViewModel.mainArticle)
-                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     
                     CategoryListRoulette(selectedCategory: $topHeadlinesViewModel.category)
                     

@@ -53,7 +53,7 @@ struct NewsListRowView: View {
                     .fill(DefaultTheme.tintColor.opacity(0.2))
                     .frame(height: 120)
                     .frame(maxWidth: .infinity)
-                    .matchedGeometryEffect(id: "row", in: namespace)
+//                    .matchedGeometryEffect(id: "row", in: namespace)
                     .allowsHitTesting(false)
             }
         }

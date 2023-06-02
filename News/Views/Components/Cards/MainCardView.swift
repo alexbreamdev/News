@@ -9,16 +9,30 @@ import SwiftUI
 
 struct MainCardView: View {
     let article: ArticleViewModel
+    @State private var unfoldArticle: Bool = true
     @State private var eyeAnimation: Bool = false
+    @Namespace var namespace
     
     var body: some View {
+        if unfoldArticle {
+            unfoldArticleView
+        } else {
+            foldArticleView
+        }
+        
+    }
+    
+    // MARK: - Fold / Unfold Article
+    var foldArticleView: some View {
         ZStack(alignment: .bottom) {
             AsyncImageView(urlString: article.urlToImage)
                 .frame(width: UIScreen.main.bounds.width - 20, height: 250)
                 .clipped()
                 .cornerRadius(10)
+                .matchedGeometryEffect(id: "image", in: namespace)
                 .overlay(alignment: .bottomTrailing) {
                     eyeButton
+                        .matchedGeometryEffect(id: "eye", in: namespace)
                         .padding(.bottom, 70)
                 }
                 .onChange(of: article) { _ in
@@ -28,13 +42,56 @@ struct MainCardView: View {
                     eyeAnimation = false
                 }
             
+            VStack {
                 articleTitle
+                    .matchedGeometryEffect(id: "title", in: namespace)
+                if unfoldArticle {
+                    articleDescription
+                        .matchedGeometryEffect(id: "desc", in: namespace)
+                }
+            }
+            .background(DefaultTheme.backgroundPrimary)
         }
         .overlay {
             thinBorderOverlay
         }
         .padding(.horizontal)
-        
+    }
+    
+    var unfoldArticleView: some View {
+        ZStack(alignment: .bottom) {
+            AsyncImageView(urlString: article.urlToImage)
+//                .scaledToFit()
+                .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height / 2.4, alignment: .top)
+                .clipped()
+                .cornerRadius(10)
+                .matchedGeometryEffect(id: "image", in: namespace)
+                .onChange(of: article) { _ in
+                    withAnimation(.spring(response: 0.5)) {
+                        eyeAnimation = true
+                    }
+                    eyeAnimation = false
+                }
+            
+            VStack(spacing: 0) {
+                articleTitle
+                    .matchedGeometryEffect(id: "title", in: namespace)
+                    .overlay(alignment: .topTrailing) {
+                        eyeButton
+                            .matchedGeometryEffect(id: "eye", in: namespace)
+                            .padding(.top, -40)
+                    }
+                
+                articleDescription
+                    .matchedGeometryEffect(id: "desc", in: namespace)
+            }
+            .background(DefaultTheme.backgroundPrimary)
+            
+        }
+        .overlay {
+            thinBorderOverlay
+        }
+        .padding(.horizontal)
     }
     
     // MARK: - Main Card View Components
@@ -42,9 +99,22 @@ struct MainCardView: View {
         Text(article.title)
             .font(.title2)
             .fontWeight(.bold)
-            .lineLimit(2)
+            .lineLimit(unfoldArticle ? 4 : 2)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(minHeight: 55, alignment: .top)
+            .frame(minHeight: unfoldArticle ? 55 : 55, alignment: .top)
+            .multilineTextAlignment(.leading)
+            .padding(5)
+            .padding(.horizontal, 3)
+            .background(DefaultTheme.backgroundPrimary)
+    }
+    
+    private var articleDescription: some View {
+        Text(article.description ?? "")
+            .font(.body)
+            .fontWeight(.semibold)
+            .fixedSize(horizontal: false, vertical: false)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(minHeight: unfoldArticle ? 70  :  55, alignment: .top)
             .multilineTextAlignment(.leading)
             .padding(5)
             .padding(.horizontal, 3)
@@ -60,14 +130,16 @@ struct MainCardView: View {
     
     private var eyeButton: some View {
         Button {
-            
+            withAnimation(.easeOut) {
+                unfoldArticle.toggle()
+            }
         } label: {
             Image(systemName: "eye.fill")
                 .font(.title2)
                 .foregroundColor(DefaultTheme.tintColor)
                 .padding(10)
                 .scaleEffect(eyeAnimation ? 1.2 : 0.7)
-                
+            
         }
     }
 }
