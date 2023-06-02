@@ -16,6 +16,7 @@ struct NewsListView: View {
             ForEach(topHeadlinesVM.articles) { article in
                 NewsListRowView(article: article, isSelected: article == topHeadlinesVM.mainArticle, namespace: namespace)
                     .frame(height: 120)
+                    .padding(.horizontal, 15)
                     .onTapGesture {
                         withAnimation {
                             topHeadlinesVM.mainArticle = article
@@ -27,10 +28,9 @@ struct NewsListView: View {
                             await topHeadlinesVM.getSetOfArticles()
                         }
                     }
-                    
             }
             .listRowSeparator(.visible)
-            .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
 
         }
         .scrollIndicators(.hidden)

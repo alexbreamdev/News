@@ -31,6 +31,7 @@ struct Source: Codable {
     let name: String
 }
 
+// MARK: - ID and Today date
 extension Article: Identifiable {
     var id: String {
         UUID().uuidString
@@ -45,7 +46,7 @@ extension Article: Identifiable {
     }
 }
 
-
+// MARK: - Hashabel
 extension Article: Hashable {
     static func == (lhs: Article, rhs: Article) -> Bool {
         lhs.id == rhs.id

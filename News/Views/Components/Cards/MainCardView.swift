@@ -44,7 +44,7 @@ struct MainCardView: View {
             .fontWeight(.bold)
             .lineLimit(2)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(minHeight: 50, alignment: .top)
+            .frame(minHeight: 55, alignment: .top)
             .multilineTextAlignment(.leading)
             .padding(5)
             .padding(.horizontal, 3)

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+#warning("Row namespace ID bug")
 struct NewsListRowView: View {
     let article: ArticleViewModel
     @State private var menuPressed: Bool = false
