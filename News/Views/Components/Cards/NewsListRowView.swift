@@ -17,6 +17,7 @@ struct NewsListRowView: View {
         HStack(alignment: .top) {
             
             AsyncImageView(urlString: article.urlToImage)
+                .scaledToFill()
                 .frame(width: 100, height: 100)
                 .cornerRadius(5)
             

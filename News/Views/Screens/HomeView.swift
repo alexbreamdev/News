@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var list: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
@@ -29,9 +30,18 @@ struct HomeView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
+                        ForEach(list, id: \.self) { item in
                             RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 200, height: 120)
+                                .overlay {
+                                    Text(item)
+                                        .foregroundColor(.white)
+                                }
+                                .onAppear {
+                                    if list.last == item {
+                                       list = Array(list.dropFirst(5)) + Array(list.prefix(5))
+                                    }
+                                }
                         }
                     }
                     .padding(.horizontal, 20)

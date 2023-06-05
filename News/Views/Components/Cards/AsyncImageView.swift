@@ -16,8 +16,7 @@ struct AsyncImageView: View {
                 switch phase {
                 case .empty:
                     ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(DefaultTheme.backgroundSecondary)
+                        DefaultTheme.backgroundSecondary
         
                         ProgressView()
                             .progressViewStyle(.automatic)
@@ -25,14 +24,13 @@ struct AsyncImageView: View {
                             .tint(DefaultTheme.tintColor)
                     }
                 case .success(let image) :
-                    image.resizable()
-                        .scaledToFill()
-                        .clipped()
+                    image
+                        .resizable()
+                     
                 case .failure :
                     Image(systemName: "photo.fill")
                         .resizable()
                         .foregroundColor(DefaultTheme.tintColor.opacity(0.5))
-                        .clipped()
 
                 @unknown default:
                     fatalError()
@@ -42,7 +40,6 @@ struct AsyncImageView: View {
             Image(systemName: "photo.fill")
                 .resizable()
                 .foregroundColor(DefaultTheme.tintColor.opacity(0.5))
-                .clipped()
         }
     }
 }

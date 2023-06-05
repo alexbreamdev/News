@@ -19,6 +19,7 @@ struct TopHeadLinesView: View {
                         ArticleWebView(urlString: topHeadlinesViewModel.mainArticle.url)
                     } label: {
                         MainCardView(article: topHeadlinesViewModel.mainArticle)
+                            .foregroundColor(DefaultTheme.fontPrimary)
                     }
                     
                     CategoryListRoulette(selectedCategory: $topHeadlinesViewModel.category)

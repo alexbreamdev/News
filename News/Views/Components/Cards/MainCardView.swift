@@ -14,79 +14,82 @@ struct MainCardView: View {
     @Namespace var namespace
     
     var body: some View {
-        if unfoldArticle {
-            unfoldArticleView
-        } else {
-            foldArticleView
-        }
-        
+        foldArticleView
     }
     
     // MARK: - Fold / Unfold Article
     var foldArticleView: some View {
         ZStack(alignment: .bottom) {
-            AsyncImageView(urlString: article.urlToImage)
-                .frame(width: UIScreen.main.bounds.width - 20, height: 250)
-                .clipped()
-                .cornerRadius(10)
-                .matchedGeometryEffect(id: "image", in: namespace)
-                .overlay(alignment: .bottomTrailing) {
-                    eyeButton
-                        .matchedGeometryEffect(id: "eye", in: namespace)
-                        .padding(.bottom, 70)
-                }
-                .onChange(of: article) { _ in
-                    withAnimation(.spring(response: 0.5)) {
-                        eyeAnimation = true
-                    }
-                    eyeAnimation = false
-                }
-            
             VStack {
-                articleTitle
-                    .matchedGeometryEffect(id: "title", in: namespace)
-                if unfoldArticle {
-                    articleDescription
-                        .matchedGeometryEffect(id: "desc", in: namespace)
+                AsyncImageView(urlString: article.urlToImage)
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width - 20, height: 250)
+                    .clipped()
+                    .matchedGeometryEffect(id: "image", in: namespace)
+                    .onChange(of: article) { _ in
+                        withAnimation(.spring(response: 0.5)) {
+                            eyeAnimation = true
+                        }
+                        eyeAnimation = false
+                    }
+                
+                
+                VStack(spacing: 4) {
+                    articleTitle
+                        .overlay(alignment: .topTrailing) {
+                            eyeButton
+                                .matchedGeometryEffect(id: "eye", in: namespace)
+                                .padding(.top, -60)
+                        }
+                        .matchedGeometryEffect(id: "title", in: namespace)
+                    if unfoldArticle {
+                        articleDescription
+                            .matchedGeometryEffect(id: "desc", in: namespace)
+                        
+                    }
+                    
                 }
+                .background(DefaultTheme.backgroundPrimary)
             }
-            .background(DefaultTheme.backgroundPrimary)
-        }
-        .overlay {
-            thinBorderOverlay
+            .cornerRadius(10)
+            .overlay {
+                thinBorderOverlay
+                
+            }
         }
         .padding(.horizontal)
     }
     
     var unfoldArticleView: some View {
         ZStack(alignment: .bottom) {
-            AsyncImageView(urlString: article.urlToImage)
-//                .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height / 2.4, alignment: .top)
-                .clipped()
-                .cornerRadius(10)
-                .matchedGeometryEffect(id: "image", in: namespace)
-                .onChange(of: article) { _ in
-                    withAnimation(.spring(response: 0.5)) {
-                        eyeAnimation = true
-                    }
-                    eyeAnimation = false
-                }
-            
-            VStack(spacing: 0) {
-                articleTitle
-                    .matchedGeometryEffect(id: "title", in: namespace)
-                    .overlay(alignment: .topTrailing) {
-                        eyeButton
-                            .matchedGeometryEffect(id: "eye", in: namespace)
-                            .padding(.top, -40)
+            VStack {
+                AsyncImageView(urlString: article.urlToImage)
+                //                                .scaledToFit()
+                    .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height / 2.4, alignment: .top)
+                    .clipped()
+                    .cornerRadius(10)
+                    .matchedGeometryEffect(id: "image", in: namespace)
+                    .onChange(of: article) { _ in
+                        withAnimation(.spring(response: 0.5)) {
+                            eyeAnimation = true
+                        }
+                        eyeAnimation = false
                     }
                 
-                articleDescription
-                    .matchedGeometryEffect(id: "desc", in: namespace)
+                VStack(spacing: 0) {
+                    articleTitle
+                        .matchedGeometryEffect(id: "title", in: namespace)
+                        .overlay(alignment: .topTrailing) {
+                            eyeButton
+                                .matchedGeometryEffect(id: "eye", in: namespace)
+                                .padding(.top, -40)
+                        }
+                    
+                    articleDescription
+                        .matchedGeometryEffect(id: "desc", in: namespace)
+                }
+                .background(DefaultTheme.backgroundPrimary)
             }
-            .background(DefaultTheme.backgroundPrimary)
-            
         }
         .overlay {
             thinBorderOverlay
@@ -111,7 +114,7 @@ struct MainCardView: View {
     private var articleDescription: some View {
         Text(article.description ?? "")
             .font(.body)
-            .fontWeight(.semibold)
+            .fontWeight(.medium)
             .fixedSize(horizontal: false, vertical: false)
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(minHeight: unfoldArticle ? 70  :  55, alignment: .top)

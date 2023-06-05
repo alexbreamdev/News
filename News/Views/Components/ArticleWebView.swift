@@ -23,7 +23,7 @@ struct ArticleWebView: UIViewRepresentable {
         let config = WKWebViewConfiguration()
         config.defaultWebpagePreferences = preferences
     
-        var webView = WKWebView(frame: .zero, configuration: config)
+        let webView = WKWebView(frame: .zero, configuration: config)
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         return webView

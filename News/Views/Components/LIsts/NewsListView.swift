@@ -41,7 +41,7 @@ struct NewsListView: View {
 
 struct NewsListView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsListView()
+       TopHeadLinesView()
             .environmentObject(TopHeadlinesViewModel())
 
     }
