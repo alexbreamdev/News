@@ -8,7 +8,7 @@
 import WebKit
 import SwiftUI
 
-@MainActor
+//@MainActor
 struct ArticleWebView: UIViewRepresentable {
     let url: URL?
     init(urlString: String) {

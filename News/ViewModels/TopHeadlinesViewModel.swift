@@ -134,7 +134,7 @@ final class TopHeadlinesViewModel: ObservableObject {
     }
 }
 
-struct ArticleViewModel: Identifiable {
+struct ArticleViewModel: Identifiable, Hashable {
     let id: String
     let title: String
     let url: String

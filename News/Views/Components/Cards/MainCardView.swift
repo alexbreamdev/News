@@ -42,17 +42,21 @@ struct MainCardView: View {
                         .overlay(alignment: .topTrailing) {
                             eyeButton
                                 .matchedGeometryEffect(id: "eye", in: namespace)
-                                .padding(.top, -60)
+                                .padding(.top, -70)
                         }
                         .matchedGeometryEffect(id: "title", in: namespace)
                     if unfoldArticle {
                         articleDescription
                             .matchedGeometryEffect(id: "desc", in: namespace)
-                        
-                        articleContent
-                            .matchedGeometryEffect(id: "cont", in: namespace)
+                        NavigationLink(value: article) {
+                            articleContent
+                                .matchedGeometryEffect(id: "cont", in: namespace)
+                        }
                     }
                 }
+                .navigationDestination(for: ArticleViewModel.self, destination: { article in
+                        ArticleWebView(urlString: article.url)
+                })
                 .background(DefaultTheme.backgroundPrimary)
             }
             .cornerRadius(10)
@@ -121,8 +125,11 @@ struct MainCardView: View {
             Image(systemName: "eye.fill")
                 .font(.title2)
                 .foregroundColor(DefaultTheme.tintColor)
-                .padding(10)
                 .scaleEffect(eyeAnimation ? 1.2 : 0.7)
+                .padding(2)
+                .padding(.vertical, 4)
+                .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding(10)
             
         }
     }

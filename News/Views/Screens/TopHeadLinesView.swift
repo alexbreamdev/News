@@ -15,12 +15,10 @@ struct TopHeadLinesView: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 15) {
-                    NavigationLink {
-                        ArticleWebView(urlString: topHeadlinesViewModel.mainArticle.url)
-                    } label: {
-                        MainCardView(article: topHeadlinesViewModel.mainArticle)
-                            .foregroundColor(DefaultTheme.fontPrimary)
-                    }
+                    
+                    MainCardView(article: topHeadlinesViewModel.mainArticle)
+                        .foregroundColor(DefaultTheme.fontPrimary)
+                    
                     
                     CategoryListRoulette(selectedCategory: $topHeadlinesViewModel.category)
                     
