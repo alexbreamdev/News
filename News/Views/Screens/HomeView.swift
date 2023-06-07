@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var list: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    @AppStorage("tab") private var selectedTab: Int = 1
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
@@ -21,10 +22,14 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    Text("See more")
-                        .multilineTextAlignment(.trailing)
-                        .foregroundColor(DefaultTheme.tintColor)
-                        .fontWeight(.semibold)
+                    Button {
+                        selectedTab = 2
+                    } label: {
+                        Text("See more")
+                            .multilineTextAlignment(.trailing)
+                            .foregroundColor(DefaultTheme.tintColor)
+                            .fontWeight(.semibold)
+                    }
                 }
                 .padding(.horizontal, 20)
                 
@@ -61,5 +66,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(TopHeadlinesViewModel())
     }
 }

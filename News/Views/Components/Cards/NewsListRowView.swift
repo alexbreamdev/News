@@ -51,7 +51,7 @@ struct NewsListRowView: View {
         .overlay {
             if isSelected {
                 Rectangle()
-                    .fill(DefaultTheme.tintColor.opacity(0.2))
+                    .foregroundStyle(LinearGradient(colors: [DefaultTheme.tintColor.opacity(0.2), DefaultTheme.tintColor.opacity(0)], startPoint: .leading, endPoint: .trailing))
                     .frame(height: 120)
                     .frame(maxWidth: .infinity)
 //                    .matchedGeometryEffect(id: "row", in: namespace)

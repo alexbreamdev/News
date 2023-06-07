@@ -17,7 +17,6 @@ struct MainView: View {
                     .tag(1)
                 
                 TopHeadLinesView()
-                    .environmentObject(topheadlinesViewModel)
                     .tag(2)
                 PlaceholderItemView(title: "Discover", systemIconName: "safari", selectedTab: $selectedTab)
                     .tag(3)
@@ -27,6 +26,7 @@ struct MainView: View {
                     .tag(5)
             }
             .tint(DefaultTheme.tintColor)
+            .environmentObject(topheadlinesViewModel)
     }
 }
 
