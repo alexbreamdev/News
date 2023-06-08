@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var list: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    @EnvironmentObject var homeViewModel: HomeViewModel
     @AppStorage("tab") private var selectedTab: Int = 1
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Breaking News")
+                    Text("Top Headlines")
                         .font(.title)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.leading)
@@ -35,18 +35,8 @@ struct HomeView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(list, id: \.self) { item in
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 200, height: 120)
-                                .overlay {
-                                    Text(item)
-                                        .foregroundColor(.white)
-                                }
-                                .onAppear {
-                                    if list.last == item {
-                                       list = Array(list.dropFirst(5)) + Array(list.prefix(5))
-                                    }
-                                }
+                        ForEach(homeViewModel.articles) { article in
+                            HomeCardView(article: article)
                         }
                     }
                     .padding(.horizontal, 20)
@@ -54,6 +44,9 @@ struct HomeView: View {
             }
             
             Spacer()
+        }
+        .task {
+            await homeViewModel.getTenArticles()
         }
         .tabItem {
             Image(systemName: "house")
@@ -66,6 +59,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(TopHeadlinesViewModel())
+            .environmentObject(HomeViewModel())
     }
 }

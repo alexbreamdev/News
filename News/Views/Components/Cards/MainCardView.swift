@@ -78,7 +78,7 @@ struct MainCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .multilineTextAlignment(.leading)
             .padding(.bottom, 5)
-            .padding(.horizontal, 3)
+            .padding(.horizontal, 5)
             .background(DefaultTheme.backgroundPrimary)
 //            .background(Color.blue)
     }

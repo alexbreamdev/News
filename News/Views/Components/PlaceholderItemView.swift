@@ -31,6 +31,6 @@ struct PlaceholderItemView: View {
 
 struct TabItemView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceholderItemView(title: "Hot", systemIconName: "flame", selectedTab: .constant(1))
+        PlaceholderItemView(title: "Hot", systemIconName: "flame", selectedTab: .constant(5))
     }
 }

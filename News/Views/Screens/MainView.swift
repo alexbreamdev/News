@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
-
+#warning("Attribute graph when switch between first and second tabs")
 struct MainView: View {
-    @StateObject var topheadlinesViewModel = TopHeadlinesViewModel()
     @AppStorage("tab") private var selectedTab: Int = 0
     
     var body: some View {
             TabView(selection: $selectedTab) {
                 HomeView()
                     .tag(1)
-                
                 TopHeadLinesView()
                     .tag(2)
                 PlaceholderItemView(title: "Discover", systemIconName: "safari", selectedTab: $selectedTab)
@@ -26,7 +24,6 @@ struct MainView: View {
                     .tag(5)
             }
             .tint(DefaultTheme.tintColor)
-            .environmentObject(topheadlinesViewModel)
     }
 }
 

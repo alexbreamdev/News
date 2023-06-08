@@ -184,7 +184,7 @@ extension ArticleViewModel: Equatable {
     
 }
 
-// MARK: - State of VIew
+// MARK: - State of View
 extension TopHeadlinesViewModel {
     enum ViewState {
         case fetching

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F0406A12A311229007C1A74 /* HomeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0406A02A311229007C1A74 /* HomeCardView.swift */; };
 		2F6161D92A07824A00A15CD5 /* MainCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6161D82A07824A00A15CD5 /* MainCardView.swift */; };
 		2F73321C29FFD47C00D9EA80 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F73321B29FFD47C00D9EA80 /* HomeView.swift */; };
 		2F73321E29FFDC3400D9EA80 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F73321D29FFDC3400D9EA80 /* AsyncImageView.swift */; };
@@ -32,9 +33,11 @@
 		2FAA6B8E29FD1A66004DE60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FAA6B8D29FD1A66004DE60A /* Assets.xcassets */; };
 		2FAA6B9129FD1A66004DE60A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FAA6B9029FD1A66004DE60A /* Preview Assets.xcassets */; };
 		2FB4BF4729FE72CE00FF4FDD /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB4BF4629FE72CE00FF4FDD /* Categories.swift */; };
+		2FB6DCC32A31B5470050347B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6DCC22A31B5470050347B /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F0406A02A311229007C1A74 /* HomeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardView.swift; sourceTree = "<group>"; };
 		2F6161D82A07824A00A15CD5 /* MainCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCardView.swift; sourceTree = "<group>"; };
 		2F73321B29FFD47C00D9EA80 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2F73321D29FFDC3400D9EA80 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 		2FAA6B8D29FD1A66004DE60A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FAA6B9029FD1A66004DE60A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2FB4BF4629FE72CE00FF4FDD /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
+		2FB6DCC22A31B5470050347B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 				2F73321D29FFDC3400D9EA80 /* AsyncImageView.swift */,
 				2F89E77029FD397700545DC5 /* NewsListRowView.swift */,
 				2F6161D82A07824A00A15CD5 /* MainCardView.swift */,
+				2F0406A02A311229007C1A74 /* HomeCardView.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				2F89E77E29FD666400545DC5 /* TopHeadlinesViewModel.swift */,
+				2FB6DCC22A31B5470050347B /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -313,12 +319,14 @@
 				2F89E77529FD3B5800545DC5 /* ArticleWebView.swift in Sources */,
 				2F89E77D29FD621700545DC5 /* Date+Extension.swift in Sources */,
 				2F89E76929FD271200545DC5 /* PlaceholderItemView.swift in Sources */,
+				2F0406A12A311229007C1A74 /* HomeCardView.swift in Sources */,
 				2F89E77F29FD666400545DC5 /* TopHeadlinesViewModel.swift in Sources */,
 				2F89E77329FD3B2400545DC5 /* Bundle+Extension.swift in Sources */,
 				2FAA6B8C29FD1A65004DE60A /* MainView.swift in Sources */,
 				2FAA6B8A29FD1A65004DE60A /* NewsApp.swift in Sources */,
 				2F6161D92A07824A00A15CD5 /* MainCardView.swift in Sources */,
 				2F73321E29FFDC3400D9EA80 /* AsyncImageView.swift in Sources */,
+				2FB6DCC32A31B5470050347B /* HomeViewModel.swift in Sources */,
 				2F73321C29FFD47C00D9EA80 /* HomeView.swift in Sources */,
 				2F89E77129FD397700545DC5 /* NewsListRowView.swift in Sources */,
 				2F955F362A278D5F004B0956 /* Endpoint.swift in Sources */,
