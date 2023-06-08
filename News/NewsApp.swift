@@ -11,11 +11,14 @@ import SwiftUI
 struct NewsApp: App {
     @StateObject var topheadlinesViewModel = TopHeadlinesViewModel()
     @StateObject var homeViewModel = HomeViewModel()
+    @AppStorage("isDark") var isDark: Bool = false
+    
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environmentObject(topheadlinesViewModel)
                 .environmentObject(homeViewModel)
+                .preferredColorScheme(isDark ? .dark : .light)
         }
     }
 }

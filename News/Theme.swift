@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-protocol ThemeColor {
+protocol MyTheme {
     static var backgroundPrimary: Color { get set }
     static var backgroundSecondary: Color { get set }
     static var fontPrimary: Color { get set }
@@ -24,14 +24,12 @@ protocol ThemeSize {
     static var spacing: CGFloat { get set }
 }
 #warning("implement fonts, sizes and etc.")
-enum DefaultTheme: ThemeColor {
+struct DefaultTheme: MyTheme {
     // MARK: - Colors
     static var backgroundPrimary: Color = Color(uiColor: .systemBackground)
     static var backgroundSecondary: Color = Color(uiColor: .secondarySystemBackground)
     static var fontPrimary: Color = Color.primary
     static var fontSecondary: Color = Color.secondary
     static var tintColor: Color = Color(uiColor: .systemOrange)
-    
-    // MARK: - Fonts
     
 }

@@ -20,7 +20,7 @@ struct MainView: View {
                     .tag(3)
                 PlaceholderItemView(title: "Bookmark", systemIconName: "bookmark", selectedTab: $selectedTab)
                     .tag(4)
-                PlaceholderItemView(title: "Settings", systemIconName: "gearshape", selectedTab: $selectedTab)
+                SettingsView()
                     .tag(5)
             }
             .tint(DefaultTheme.tintColor)
