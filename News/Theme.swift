@@ -23,7 +23,7 @@ protocol ThemeSize {
     static var paddingMedium: CGFloat { get set }
     static var spacing: CGFloat { get set }
 }
- 
+#warning("implement fonts, sizes and etc.")
 enum DefaultTheme: ThemeColor {
     // MARK: - Colors
     static var backgroundPrimary: Color = Color(uiColor: .systemBackground)

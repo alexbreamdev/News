@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct NewsApp: App {
+    @StateObject var topheadlinesViewModel = TopHeadlinesViewModel()
+    @StateObject var homeViewModel = HomeViewModel()
     var body: some Scene {
         WindowGroup {
             MainView()
-                .onAppear {
-                    print(MockService.shared.article)
-                }
+                .environmentObject(topheadlinesViewModel)
+                .environmentObject(homeViewModel)
         }
     }
 }

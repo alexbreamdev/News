@@ -31,9 +31,10 @@ struct Source: Codable {
     let name: String
 }
 
+// MARK: - ID and Today date
 extension Article: Identifiable {
     var id: String {
-        return (source.id ?? "") + source.name + ISO8601DateFormatter().string(from: publishedAt)
+        UUID().uuidString
     }
     
     var publishedDate: String {
@@ -45,10 +46,10 @@ extension Article: Identifiable {
     }
 }
 
-
+// MARK: - Hashable
 extension Article: Hashable {
     static func == (lhs: Article, rhs: Article) -> Bool {
-        lhs.title == rhs.title
+        lhs.id == rhs.id
     }
     
     func hash(into hasher: inout Hasher) {

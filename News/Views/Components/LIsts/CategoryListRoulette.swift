@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct CategoryListRoulette: View {
-    @State private var selectedCategory: Category = .all
+    @Binding var selectedCategory: Category
+    @Namespace var namespace
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(Category.allCases, id: \.rawValue) { category in
-                    CategoryView(category: category, selected: selectedCategory == category)
+                    CategoryView(category: category, selected: selectedCategory == category, namespace: namespace)
                         .onTapGesture {
-                            selectedCategory = category
+                            withAnimation {
+                                selectedCategory = category
+                                
+                            }
                         }
                 }
             }
@@ -27,20 +31,31 @@ struct CategoryListRoulette: View {
 struct CategoryView: View {
     let category: Category
     let selected: Bool
+    let namespace: Namespace.ID
     
     var body: some View {
-        Text(category.categoryLabel)
+        Text(category.categoryLabel.uppercased())
             .font(.subheadline)
             .fontWeight(.semibold)
-            .padding()
-            .background(selected ? DefaultTheme.tintColor.opacity(0.7) : DefaultTheme.backgroundSecondary)
-            .cornerRadius(20)
+            .padding(.vertical, 7)
+            .padding(.horizontal)
+            .background {
+                if selected {
+                    Capsule()
+                        .fill(DefaultTheme.tintColor.opacity(0.7))
+                        .matchedGeometryEffect(id: "Selected", in: namespace, isSource: selected)
+                } else {
+                    Capsule()
+                        .stroke(DefaultTheme.tintColor, lineWidth: 1)
+                }
+            }
+            .padding(.vertical, 1)
     }
 }
 
 struct CategoryListRoulette_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryListRoulette()
+        CategoryListRoulette(selectedCategory: .constant(.all))
        
     }
 }

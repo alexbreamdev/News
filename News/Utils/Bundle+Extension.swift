@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// MARK: - Load from bundle
 extension Bundle {
     func decode<T: Decodable>(_ type: T.Type,
                               from file: String,

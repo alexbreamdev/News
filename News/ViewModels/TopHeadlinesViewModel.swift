@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+// MARK: - Top Headlines Screen View Model
 @MainActor
 final class TopHeadlinesViewModel: ObservableObject {
     @Published var articles: [ArticleViewModel] = []
@@ -15,6 +16,7 @@ final class TopHeadlinesViewModel: ObservableObject {
     @Published var error: NetworkingService.NetworkingError?
     @Published var hasError: Bool = false
     @Published var viewState: ViewState?
+    @Published var category: Category = .all
     
     var isLoading: Bool {
         viewState == .loading
@@ -38,6 +40,15 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
     }
     
+    func getAllArticles(_ isDebug: Bool = false) async {
+        if isDebug {
+            getAllArticlesMock()
+        } else {
+           await getAllArticles()
+        }
+    }
+    
+    // initial api call
     func getAllArticles() async {
         reset()
 
@@ -48,7 +59,7 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
         
         do {
-            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize), type: TopHeadlinesResult.self)
+            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize, category: category), type: TopHeadlinesResult.self)
             totalResults = result.totalResults
             self.articles = result.articles.compactMap { article -> ArticleViewModel? in
                 return ArticleViewModel(article)
@@ -66,6 +77,7 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
     }
     
+    // next page api call
     func getSetOfArticles() async {
         guard totalPages != nil, page != totalPages else {
             return
@@ -81,7 +93,7 @@ final class TopHeadlinesViewModel: ObservableObject {
         
         do {
             // request using endpoint and user
-            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize), type: TopHeadlinesResult.self)
+            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize, category: category), type: TopHeadlinesResult.self)
             totalResults = result.totalResults
             self.articles += result.articles.compactMap { article -> ArticleViewModel? in
                 return ArticleViewModel(article)
@@ -97,7 +109,9 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
     }
     
-    func getAllArticles() {
+    // mock function
+    func getAllArticlesMock() {
+        viewState = .loading
         dataSevice.$articlesUSA
             .map { article -> [ArticleViewModel] in
                 article
@@ -105,12 +119,14 @@ final class TopHeadlinesViewModel: ObservableObject {
                         ArticleViewModel($0)
                     }
             }
+            .delay(for: 3, scheduler: RunLoop.main)
             .sink { [weak self] returnedArticles in
                 if let self = self {
                     self.articles = returnedArticles
                     if self.articles.count > 0 {
                         mainArticle = self.articles[0]
                     }
+                    self.viewState = .finished
                 }
             }
             .store(in: &cancellables)
@@ -121,11 +137,15 @@ final class TopHeadlinesViewModel: ObservableObject {
     }
 }
 
-struct ArticleViewModel: Identifiable {
+// MARK: - ViewModel for Article
+struct ArticleViewModel: Identifiable, Hashable {
     let id: String
     let title: String
     let url: String
     let urlToImage: String
+    let sourceName: String
+    let description: String?
+    let content: String?
     private let publishedAt: Date
     
     var publishedDate: String {
@@ -141,6 +161,9 @@ struct ArticleViewModel: Identifiable {
         self.title = "Placeholder"
         self.url = ""
         self.urlToImage = ""
+        self.sourceName = "CNN"
+        self.description = "Description here"
+        self.content = "Some content"
         self.publishedAt = Date.now
     }
     
@@ -149,7 +172,10 @@ struct ArticleViewModel: Identifiable {
         if article.title == nil { return nil }
         self.title = article.title!
         self.url = article.url
+        self.description = article.description
+        self.sourceName = article.source.name
         self.urlToImage = article.urlToImage ?? ""
+        self.content = article.content ?? ""
         self.publishedAt = article.publishedAt
     }
     
@@ -162,7 +188,7 @@ extension ArticleViewModel: Equatable {
     
 }
 
-// MARK: - State of VIew
+// MARK: - State of View
 extension TopHeadlinesViewModel {
     enum ViewState {
         case fetching
