@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+#warning("Refreshable visual bug")
+#warning("Try viewThatFits to fix landscape problem")
 struct TopHeadLinesView: View {
     @EnvironmentObject var topHeadlinesViewModel: TopHeadlinesViewModel
     @State private var task: Task<Void, Never>?
@@ -15,14 +16,17 @@ struct TopHeadLinesView: View {
         NavigationStack {
             ZStack {
                 VStack(spacing: 15) {
-                    
                     MainCardView(article: topHeadlinesViewModel.mainArticle)
                         .foregroundColor(DefaultTheme.fontPrimary)
-                    
                     
                     CategoryListRoulette(selectedCategory: $topHeadlinesViewModel.category)
                     
                     NewsListView()
+                        .refreshable {
+                            Task {
+                                await topHeadlinesViewModel.getAllArticles(false)
+                            }
+                        }
                 }
                 
                 if topHeadlinesViewModel.isLoading {

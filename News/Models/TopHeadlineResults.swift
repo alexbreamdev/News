@@ -46,7 +46,7 @@ extension Article: Identifiable {
     }
 }
 
-// MARK: - Hashabel
+// MARK: - Hashable
 extension Article: Hashable {
     static func == (lhs: Article, rhs: Article) -> Bool {
         lhs.id == rhs.id

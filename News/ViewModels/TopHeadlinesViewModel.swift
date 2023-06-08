@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+// MARK: - Top Headlines Screen View Model
 @MainActor
 final class TopHeadlinesViewModel: ObservableObject {
     @Published var articles: [ArticleViewModel] = []
@@ -46,6 +47,7 @@ final class TopHeadlinesViewModel: ObservableObject {
            await getAllArticles()
         }
     }
+    
     // initial api call
     func getAllArticles() async {
         reset()
@@ -106,6 +108,7 @@ final class TopHeadlinesViewModel: ObservableObject {
             }
         }
     }
+    
     // mock function
     func getAllArticlesMock() {
         viewState = .loading
@@ -134,6 +137,7 @@ final class TopHeadlinesViewModel: ObservableObject {
     }
 }
 
+// MARK: - ViewModel for Article
 struct ArticleViewModel: Identifiable, Hashable {
     let id: String
     let title: String

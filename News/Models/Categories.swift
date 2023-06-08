@@ -17,7 +17,7 @@ import Foundation
  technology.
  Note: you can't mix this param with the sources param.
  */
-
+// MARK: - Article's topics. API endpoints
 enum Category: String, CaseIterable, Identifiable {
     case all
     case general

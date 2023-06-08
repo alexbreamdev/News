@@ -14,7 +14,6 @@ struct HomeCardView: View {
         AsyncImageView(urlString: article.urlToImage)
             .scaledToFill()
             .frame(width: 250, height: 150)
-        
             .overlay(alignment: .bottom) {
                 VStack {
                     Text(article.title)
