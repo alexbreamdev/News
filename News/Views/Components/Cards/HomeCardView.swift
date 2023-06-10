@@ -9,21 +9,26 @@ import SwiftUI
 
 struct HomeCardView: View {
     let article: ArticleViewModel
+    var width: CGFloat = 250
+    var height: CGFloat = 150
+    @AppStorage("theme") var appTheme: Themes = .main
     
     var body: some View {
         AsyncImageView(urlString: article.urlToImage)
             .scaledToFill()
-            .frame(width: 250, height: 150)
+            .frame(width: width, height: height)
             .overlay(alignment: .bottom) {
-                VStack {
+                VStack(alignment: .leading) {
                     Text(article.title)
                         .font(.subheadline)
                         .fontWeight(.semibold)
+                        .foregroundColor(appTheme.fontPrimary)
+                        .multilineTextAlignment(.leading)
                         .padding(4)
                         .lineLimit(2)
                 }
                 .frame(maxWidth: .infinity)
-                .background(DefaultTheme.backgroundPrimary)
+                .background(appTheme.backgroundPrimary)
             }
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay {
@@ -34,8 +39,8 @@ struct HomeCardView: View {
     private var thinBorderOverlay: some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(lineWidth: 2)
-            .foregroundColor(DefaultTheme.backgroundSecondary)
-            .shadow(color: DefaultTheme.backgroundSecondary, radius: 4, x: 0, y: 4)
+            .foregroundColor(appTheme.backgroundSecondary)
+            .shadow(color: appTheme.backgroundSecondary, radius: 4, x: 0, y: 4)
     }
 }
 

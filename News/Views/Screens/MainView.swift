@@ -18,7 +18,7 @@ struct MainView: View {
                     .tag(2)
                 PlaceholderItemView(title: "Discover", systemIconName: "safari", selectedTab: $selectedTab)
                     .tag(3)
-                PlaceholderItemView(title: "Bookmark", systemIconName: "bookmark", selectedTab: $selectedTab)
+                BookmarksView()
                     .tag(4)
                 SettingsView()
                     .tag(5)

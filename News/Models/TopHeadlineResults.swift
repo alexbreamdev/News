@@ -34,7 +34,7 @@ struct Source: Codable {
 // MARK: - ID and Today date
 extension Article: Identifiable {
     var id: String {
-        UUID().uuidString
+        return url + (title ?? source.name) + publishedDate
     }
     
     var publishedDate: String {

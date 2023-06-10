@@ -137,57 +137,6 @@ final class TopHeadlinesViewModel: ObservableObject {
     }
 }
 
-// MARK: - ViewModel for Article
-struct ArticleViewModel: Identifiable, Hashable {
-    let id: String
-    let title: String
-    let url: String
-    let urlToImage: String
-    let sourceName: String
-    let description: String?
-    let content: String?
-    private let publishedAt: Date
-    
-    var publishedDate: String {
-        if Calendar.current.isDate(publishedAt, equalTo: Date.now, toGranularity: .day) {
-            return "Today, \(publishedAt.formatted(date: .omitted, time: .shortened))"
-        } else {
-            return publishedAt.formattedDate()
-        }
-    }
-    
-    init() {
-        self.id = "id"
-        self.title = "Placeholder"
-        self.url = ""
-        self.urlToImage = ""
-        self.sourceName = "CNN"
-        self.description = "Description here"
-        self.content = "Some content"
-        self.publishedAt = Date.now
-    }
-    
-    init?(_ article: Article) {
-        self.id = article.id
-        if article.title == nil { return nil }
-        self.title = article.title!
-        self.url = article.url
-        self.description = article.description
-        self.sourceName = article.source.name
-        self.urlToImage = article.urlToImage ?? ""
-        self.content = article.content ?? ""
-        self.publishedAt = article.publishedAt
-    }
-    
-    static var placeholderArticle: ArticleViewModel {
-        return ArticleViewModel()
-    }
-}
-
-extension ArticleViewModel: Equatable {
-    
-}
-
 // MARK: - State of View
 extension TopHeadlinesViewModel {
     enum ViewState {

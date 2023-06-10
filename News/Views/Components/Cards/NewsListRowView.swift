@@ -32,7 +32,7 @@ struct NewsListRowView: View {
                         .background(DefaultTheme.tintColor.opacity(0.3))
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5)
                         )
-                    Text(article.publishedDate)
+                    Text(article.publishedDateString)
                         .foregroundColor(.secondary)
                         .fontWeight(.semibold)
                         .font(.caption)

@@ -11,6 +11,7 @@ import SwiftUI
 struct NewsApp: App {
     @StateObject var topheadlinesViewModel = TopHeadlinesViewModel()
     @StateObject var homeViewModel = HomeViewModel()
+    @StateObject var realm = RealmService(name: "articles")
     @AppStorage("isDark") var isDark: Bool = false
     @AppStorage("theme") var appTheme: Themes = .main
     
@@ -19,7 +20,9 @@ struct NewsApp: App {
             MainView()
                 .environmentObject(topheadlinesViewModel)
                 .environmentObject(homeViewModel)
+                .environmentObject(realm)
                 .preferredColorScheme(isDark ? .dark : .light)
+            let _ = print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.path)
         }
     }
 }

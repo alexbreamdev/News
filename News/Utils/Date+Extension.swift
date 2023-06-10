@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Formatt date with locale
+// MARK: - Format date with locale
 extension Date {
     func formattedDate(locale: String = "en_us") -> String {
         let dateFormatter = DateFormatter()
