@@ -33,3 +33,43 @@ struct DefaultTheme: MyTheme {
     static var tintColor: Color = Color(uiColor: .systemOrange)
     
 }
+
+enum Themes: String, Codable, CaseIterable {
+    case main
+    
+    
+    var backgroundPrimary: Color {
+        switch self {
+        case .main:
+            return Color(uiColor: .systemBackground)
+        }
+    }
+    
+    var backgroundSecondary: Color {
+        switch self {
+        case .main:
+            return Color(uiColor: .secondarySystemBackground)
+        }
+    }
+    
+    var fontPrimary: Color {
+        switch self {
+        case .main:
+            return Color.primary
+        }
+    }
+    
+    var fontSecondary: Color {
+        switch self {
+        case .main:
+            return Color.secondary
+        }
+    }
+    
+    var tintColor: Color {
+        switch self {
+        case .main:
+            return Color(uiColor: .systemOrange)
+        }
+    }
+}

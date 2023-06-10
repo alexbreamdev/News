@@ -12,6 +12,7 @@ struct NewsApp: App {
     @StateObject var topheadlinesViewModel = TopHeadlinesViewModel()
     @StateObject var homeViewModel = HomeViewModel()
     @AppStorage("isDark") var isDark: Bool = false
+    @AppStorage("theme") var appTheme: Themes = .main
     
     var body: some Scene {
         WindowGroup {
