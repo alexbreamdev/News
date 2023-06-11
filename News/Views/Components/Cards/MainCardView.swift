@@ -143,6 +143,8 @@ struct MainCardView: View {
             withAnimation {
                 if !realm.objectExist(article: article) {
                     realm.add(article)
+                } else {
+                    realm.remove(article)
                 }
             }
         } label: {

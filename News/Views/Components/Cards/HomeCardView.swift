@@ -30,6 +30,29 @@ struct HomeCardView: View {
                 .frame(maxWidth: .infinity)
                 .background(appTheme.backgroundPrimary)
             }
+            .overlay(alignment: .top, content: {
+                HStack {
+                    Text(article.sourceName)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(appTheme.fontPrimary)
+                        .lineLimit(1)
+                        .padding(2)
+                        .padding(.horizontal, 2)
+                        .background(appTheme.tintColor)
+                        .cornerRadius(5)
+                    Spacer(minLength: 50)
+                    
+                    Text(article.publishedDateString)
+                        .font(.caption2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(appTheme.fontPrimary)
+                        .lineLimit(1)
+                        .padding(2)
+                        .padding(.horizontal, 2)
+                        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5))
+                }
+            })
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay {
                 thinBorderOverlay

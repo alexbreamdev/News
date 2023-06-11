@@ -11,8 +11,7 @@ import RealmSwift
 struct BookmarksView: View {
     @AppStorage("theme") var appTheme: Themes = .main
     @EnvironmentObject var realm: RealmService
-    @State private var isLongPress: Bool = false
-    
+    @State private var removeAllDialog: Bool = false
     let columns: [GridItem] = [GridItem(.adaptive(minimum: 180)), GridItem(.adaptive(minimum: 180))]
     
     var body: some View {
@@ -34,13 +33,31 @@ struct BookmarksView: View {
                     }
                 }
             }
+            .accessibilityAddTraits([.isHeader])
             .navigationDestination(for: ArticleViewModel.self, destination: { article in
                 ArticleWebView(urlString: article.url)
             })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Bookmarks")
             .padding(15)
+            .accessibilityLabel("Bookmarks")
+            .toolbar {
+                
+                ToolbarItemGroup {
+                    Button {
+                        removeAllDialog.toggle()
+                    } label: {
+                        Image(systemName: "trash")
+                            .font(.subheadline)
+                    }
+                }
+            }
         }
+        .confirmationDialog("Are You Sure You Want To Remove All Articles", isPresented: $removeAllDialog, actions: {
+            Button("Remove", role: .destructive) {
+                realm.removeAll()
+            }
+        })
         .tabItem {
             Image(systemName: "bookmark.fill")
             Text("Bookmarks")
@@ -52,6 +69,6 @@ struct BookmarksView: View {
 struct BookmarksView_Previews: PreviewProvider {
     static var previews: some View {
         BookmarksView()
-            .environmentObject(RealmService(name: "preview"))
+            .environmentObject(RealmService(name: "previewRealm"))
     }
 }

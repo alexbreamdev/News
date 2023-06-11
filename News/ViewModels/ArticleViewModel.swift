@@ -27,14 +27,14 @@ struct ArticleViewModel: Identifiable, Hashable {
     }
     
     init() {
-        self.id = "id"
-        self.title = "Placeholder"
-        self.url = ""
-        self.urlToImage = ""
-        self.sourceName = "CNN"
-        self.description = "Description here"
-        self.content = "Some content"
+        self.title = "The Israeli plan to fit a fusion reactor into a container - BBC"
+        self.url = "https://www.bbc.com/news/business-65123116"
+        self.urlToImage = "https://ichef.bbci.co.uk/news/1024/branded_news/DB3B/production/_129232165_image00004.jpg"
+        self.sourceName = "BBC News"
+        self.description = "Israel's NT-Tao wants to build a compact fusion reactor and has won investment from Honda."
+        self.content = "From the outside it looks like an ordinary warehouse. But inside this unassuming building, in Hod Hasharon central Israel, is one of the most ambitious energy projects in the Middle East,\r\nResearcher… [+6174 chars]"
         self.publishedAt = Date.now
+        self.id = url + title + "\(publishedAt)"
     }
     
     init?(_ article: Article) {
