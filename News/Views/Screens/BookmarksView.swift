@@ -24,15 +24,17 @@ struct BookmarksView: View {
                             .multilineTextAlignment(.center)
                     }
                 } else {
-                    LazyVGrid(columns: columns) {
+                    LazyVGrid(columns: columns, spacing: 8) {
                         ForEach(realm.artArray) { article in
                             NavigationLink(value:  article) {
-                                HomeCardView(article: article, width: 180, height: 150)
+                                HomeCardView(article: article, width: 175, height: 130)
+                                    .padding(.horizontal, 3)
                             }
                         }
                     }
                 }
             }
+            .frame(maxWidth: .infinity)
             .accessibilityAddTraits([.isHeader])
             .navigationDestination(for: ArticleViewModel.self, destination: { article in
                 ArticleWebView(urlString: article.url)
@@ -50,6 +52,7 @@ struct BookmarksView: View {
                         Image(systemName: "trash")
                             .font(.subheadline)
                     }
+                    .tint(appTheme.tintColor)
                 }
             }
         }
