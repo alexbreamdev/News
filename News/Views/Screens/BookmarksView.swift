@@ -12,45 +12,85 @@ struct BookmarksView: View {
     @AppStorage("theme") var appTheme: Themes = .main
     @EnvironmentObject var realm: RealmService
     @State private var removeAllDialog: Bool = false
-    let columns: [GridItem] = [GridItem(.adaptive(minimum: 180)), GridItem(.adaptive(minimum: 180))]
+    @State private var isLongPressed: Bool = false
+    @State private var tempId: String?
+    @State private var path: [ArticleViewModel] = []
+    @State private var offset: CGSize = .zero
+    let columns: [GridItem] = [GridItem(.adaptive(minimum: 175)), GridItem(.adaptive(minimum: 175))]
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 if realm.articlesArray.isEmpty {
                     VStack {
                         appTheme.backgroundPrimary.ignoresSafeArea()
-                        Text("There is no bookmarks yet. Hurry up and add your favourite new")
+                        Text("There is no bookmarks yet. Hurry up and add your favourite articles")
                             .multilineTextAlignment(.center)
                     }
                 } else {
                     LazyVGrid(columns: columns, spacing: 8) {
                         ForEach(realm.artArray) { article in
-                            NavigationLink(value:  article) {
-                                HomeCardView(article: article, width: 175, height: 130)
+                            HomeCardView(article: article, width: 175, height: 130)
+                                .padding(.horizontal, 3)
+                                .offset(tempId == article.id ? offset : .zero)
+                                .onLongPressGesture {
+                                    path.append(article)
+                                }
+                                .zIndex(tempId == article.id ? 100 : 0)
+                                .overlay {
+                                    ZStack {
+                                        appTheme.tintColor
+                                            .cornerRadius(10)
+                                        Image(systemName: "trash.circle")
+                                            .font(.largeTitle)
+                                            .fontWeight(.bold)
+                                            .shadow(radius: 5, x: 0, y: 4)
+                                    }
                                     .padding(.horizontal, 3)
-                            }
+                                    .offset(tempId == article.id ? offset : .zero)
+                                    .opacity(tempId == article.id && offset != .zero ? 1 : 0)
+                                }
+                                .gesture(
+                                    DragGesture(minimumDistance: 50, coordinateSpace: .global)
+                                        .onChanged { gesture in
+                                            withAnimation {
+                                                tempId = article.id
+                                                offset = gesture.translation
+                                            }
+                                        }
+                                        .onEnded {_ in
+                                            withAnimation {
+                                                if abs(offset.height) > 75 || abs(offset.width) > 75 {
+                                                    realm.remove(article)
+                                                }
+                                                tempId = nil
+                                                offset = .zero
+                                            }
+                                        }
+                                )
                         }
                     }
                 }
             }
-            .frame(maxWidth: .infinity)
             .accessibilityAddTraits([.isHeader])
             .navigationDestination(for: ArticleViewModel.self, destination: { article in
                 ArticleWebView(urlString: article.url)
             })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Bookmarks")
             .padding(15)
             .accessibilityLabel("Bookmarks")
             .toolbar {
-                
                 ToolbarItemGroup {
-                    Button {
-                        removeAllDialog.toggle()
+                    Menu {
+                        Button {
+                            removeAllDialog.toggle()
+                        } label: {
+                            Label("Delete All", systemImage: "trash")
+                                .font(.subheadline)
+                        }
                     } label: {
-                        Image(systemName: "trash")
-                            .font(.subheadline)
+                        Label("Menu", systemImage: "ellipsis.circle")
+                            .labelStyle(.iconOnly)
                     }
                     .tint(appTheme.tintColor)
                 }
