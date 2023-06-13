@@ -10,7 +10,6 @@ import Foundation
 @MainActor
 final class HomeViewModel: ObservableObject {
     @Published var articles: [ArticleViewModel] = []
-    
     @Published var error: NetworkingService.NetworkingError?
     @Published var hasError: Bool = false
     @Published var viewState: ViewState?

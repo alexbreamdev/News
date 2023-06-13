@@ -10,11 +10,9 @@ import Foundation
 //https://newsapi.org/v2/top-headlines?country=us&apiKey=API_KEY
 // MARK: - Way to interact with API endpoints, using enum, query
 enum Endpoint {
-    // to PeopleView // page is using query parameter to make pagination
+    // to topHeadlinesview // page is using query parameter to make pagination
     case topHeadlines(page: Int?, pageSize: Int?, category: Category)
-    
-    // to DetailView
-    case detail(id: Int)
+    case everything(page: Int?, pageSize: Int?, searchText: String, language: String, sortBy: SortBy)
 
 }
 
@@ -37,8 +35,8 @@ extension Endpoint {
         switch self {
         case .topHeadlines:
             return "/v2/top-headlines"
-        case let .detail(id):
-            return ""
+        case .everything:
+            return "/v2/everything"
   
         }
     }
@@ -48,7 +46,7 @@ extension Endpoint {
         switch self {
         case .topHeadlines:
             return .GET
-        case .detail:
+        case .everything:
             return .GET
         }
     }
@@ -69,8 +67,15 @@ extension Endpoint {
             }
             
             return topHeadlinesQueryItems
-        default:
-            return nil
+            
+        case .everything(let page, let pageSize, let searchText, let language, let sortBy):
+            var everythingQueryItems = ["apiKey": ApiKey.freeKey.rawValue, "q" : searchText.lowercased(), "language" : language, "sortBy" : sortBy.rawValue]
+            if let page = page, let pageSize = pageSize {
+                everythingQueryItems.updateValue("\(page)", forKey: "page")
+                everythingQueryItems.updateValue("\(pageSize)", forKey: "pageSize")
+            }
+            return everythingQueryItems
+
         }
     }
 }
@@ -85,14 +90,35 @@ extension Endpoint {
         urlComponents.scheme = "https"
         // adding base url address to components
         urlComponents.host = host
-        // adding path to components (people, detail(id: Int, create)
+        // adding path to components
         urlComponents.path = path
         
         
-        var requestQueryItems = queryItems?.compactMap { item in
+        let requestQueryItems = queryItems?.compactMap { item in
             URLQueryItem(name: item.key, value: item.value)
         }
         urlComponents.queryItems = requestQueryItems
         return urlComponents.url
+    }
+}
+
+enum SortBy: String, CaseIterable, Identifiable {
+    case relevancy
+    case popularity
+    case publishedAt = "Date published"
+    
+    var icon: String {
+        switch self {
+        case .relevancy:
+            return "doc.text.magnifyingglass"
+        case .popularity:
+            return "person.3"
+        case .publishedAt:
+            return "clock"
+        }
+    }
+    
+    var id: Self {
+        self
     }
 }

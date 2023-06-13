@@ -1,22 +1,22 @@
 //
-//  TopHeadlinesViewModel.swift
+//  DiscoverViewModel.swift
 //  News
 //
-//  Created by Oleksii Leshchenko on 29.04.2023.
+//  Created by Oleksii Leshchenko on 13.06.2023.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
-// MARK: - Top Headlines Screen View Model
+#warning("Work in progress")
 @MainActor
-final class TopHeadlinesViewModel: ObservableObject {
+final class DiscoverViewModel: ObservableObject {
     @Published var articles: [ArticleViewModel] = []
-    @Published var mainArticle: ArticleViewModel = .placeholderArticle
     @Published var error: NetworkingService.NetworkingError?
     @Published var hasError: Bool = false
     @Published var viewState: ViewState?
-    @Published var category: Category = .all
+    @Published var searchText: String = ""
+    @Published var sortBy: SortBy = .publishedAt
     
     var isLoading: Bool {
         viewState == .loading
@@ -30,7 +30,7 @@ final class TopHeadlinesViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
     
     private var page: Int = 1
-    private var pageSize: Int? = 10
+    private var pageSize: Int? = 20
     private var totalResults: Int = 0
     private var totalPages: Int? {
         if totalResults > 0, let pageSize = pageSize {
@@ -51,7 +51,9 @@ final class TopHeadlinesViewModel: ObservableObject {
     // initial api call
     func getAllArticles() async {
         reset()
-
+        
+        guard !searchText.isEmpty else { return }
+        
         viewState = .loading
 
         defer {
@@ -59,13 +61,10 @@ final class TopHeadlinesViewModel: ObservableObject {
         }
         
         do {
-            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize, category: category), type: TopHeadlinesResult.self)
+            let result = try await NetworkingService.shared.request(Endpoint.everything(page: page, pageSize: pageSize, searchText: searchText, language: "en", sortBy: sortBy), type: EverythingResults.self)
             totalResults = result.totalResults
             self.articles = result.articles.compactMap { article -> ArticleViewModel? in
                 return ArticleViewModel(article)
-            }
-            if self.articles.count > 0 {
-                self.mainArticle = self.articles.first!
             }
         } catch {
             self.hasError = true
@@ -78,6 +77,7 @@ final class TopHeadlinesViewModel: ObservableObject {
     }
     
     // next page api call
+    // pagination doesn't work
     func getSetOfArticles() async {
         guard totalPages != nil, page != totalPages else {
             return
@@ -93,7 +93,7 @@ final class TopHeadlinesViewModel: ObservableObject {
         
         do {
             // request using endpoint and user
-            let result = try await NetworkingService.shared.request(Endpoint.topHeadlines(page: page, pageSize: pageSize, category: category), type: TopHeadlinesResult.self)
+            let result = try await NetworkingService.shared.request(Endpoint.everything(page: page, pageSize: pageSize, searchText: searchText, language: "en", sortBy: sortBy), type: EverythingResults.self)
             totalResults = result.totalResults
             self.articles += result.articles.compactMap { article -> ArticleViewModel? in
                 return ArticleViewModel(article)
@@ -123,9 +123,7 @@ final class TopHeadlinesViewModel: ObservableObject {
             .sink { [weak self] returnedArticles in
                 if let self = self {
                     self.articles = returnedArticles
-                    if self.articles.count > 0 {
-                        mainArticle = self.articles[0]
-                    }
+            
                     self.viewState = .finished
                 }
             }
@@ -141,7 +139,7 @@ final class TopHeadlinesViewModel: ObservableObject {
 }
 
 // MARK: - State of View
-extension TopHeadlinesViewModel {
+extension DiscoverViewModel {
     enum ViewState {
         case fetching
         case loading
@@ -149,7 +147,7 @@ extension TopHeadlinesViewModel {
     }
 }
 
-private extension TopHeadlinesViewModel {
+private extension DiscoverViewModel {
     func reset() {
         if viewState == .finished {
             articles.removeAll()

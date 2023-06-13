@@ -9,6 +9,7 @@ import SwiftUI
 #warning("Attribute graph when switch between first and second tabs")
 struct MainView: View {
     @AppStorage("tab") private var selectedTab: Int = 0
+    @AppStorage("theme") var appTheme: Themes = .main
     
     var body: some View {
             TabView(selection: $selectedTab) {
@@ -16,14 +17,14 @@ struct MainView: View {
                     .tag(1)
                 TopHeadLinesView()
                     .tag(2)
-                PlaceholderItemView(title: "Discover", systemIconName: "safari", selectedTab: $selectedTab)
+                DiscoverView()
                     .tag(3)
                 BookmarksView()
                     .tag(4)
                 SettingsView()
                     .tag(5)
             }
-            .tint(DefaultTheme.tintColor)
+            .tint(appTheme.tintColor)
     }
 }
 

@@ -33,7 +33,7 @@ struct HomeView: View {
                             } label: {
                                 Text("See more")
                                     .multilineTextAlignment(.trailing)
-                                    .foregroundColor(DefaultTheme.tintColor)
+                                    .foregroundColor(appTheme.tintColor)
                                     .fontWeight(.semibold)
                             }
                         }
@@ -70,7 +70,7 @@ struct HomeView: View {
                             } label: {
                                 Text("See more")
                                     .multilineTextAlignment(.trailing)
-                                    .foregroundColor(DefaultTheme.tintColor)
+                                    .foregroundColor(appTheme.tintColor)
                                     .fontWeight(.semibold)
                             }
                         }
@@ -78,6 +78,24 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
+                                if realm.artArray.isEmpty {
+                                    VStack(alignment: .center) {
+                                        Button {
+                                            withAnimation(.easeIn) {
+                                                selectedTab = 2
+                                            }
+                                        } label: {
+                                            Text("There are no bookmarks yet. \nHurry up and add your favourite articles")
+                                                .font(.subheadline)
+                                                .fontWeight(.semibold)
+                                            .multilineTextAlignment(.center)
+                                        }
+                                        Spacer()
+                                    }
+                                    .frame(width: UIScreen.main.bounds.width - 40, height: 150, alignment: .center)
+                                    .frame(maxWidth: 500)
+                                }
+                                
                                 ForEach(realm.artArray) { article in
                                     HomeCardView(article: article)
                                         .onTapGesture {
@@ -95,7 +113,7 @@ struct HomeView: View {
                 
                 if homeViewModel.viewState != .finished {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(DefaultTheme.backgroundSecondary)
+                        .fill(appTheme.backgroundSecondary)
                         .ignoresSafeArea()
                     ProgressView()
                         .tint(appTheme.tintColor)
