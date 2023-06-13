@@ -12,7 +12,6 @@ struct BookmarksView: View {
     @AppStorage("theme") var appTheme: Themes = .main
     @EnvironmentObject var realm: RealmService
     @State private var removeAllDialog: Bool = false
-    @State private var isLongPressed: Bool = false
     @State private var tempId: String?
     @State private var path: [ArticleViewModel] = []
     @State private var offset: CGSize = .zero
@@ -24,7 +23,9 @@ struct BookmarksView: View {
                 if realm.articlesArray.isEmpty {
                     VStack {
                         appTheme.backgroundPrimary.ignoresSafeArea()
-                        Text("There is no bookmarks yet. Hurry up and add your favourite articles")
+                        Text("There are no bookmarks yet. Hurry up and add your favourite articles")
+                            .font(.title2)
+                            .fontWeight(.semibold)
                             .multilineTextAlignment(.center)
                     }
                 } else {
@@ -43,12 +44,13 @@ struct BookmarksView: View {
                                             .cornerRadius(10)
                                         Image(systemName: "trash.circle")
                                             .font(.largeTitle)
+                                            .foregroundColor(appTheme.fontPrimary)
                                             .fontWeight(.bold)
                                             .shadow(radius: 5, x: 0, y: 4)
                                     }
                                     .padding(.horizontal, 3)
                                     .offset(tempId == article.id ? offset : .zero)
-                                    .opacity(tempId == article.id && offset != .zero ? 1 : 0)
+                                    .opacity(tempId == article.id && offset != .zero ? 0.7 : 0)
                                 }
                                 .gesture(
                                     DragGesture(minimumDistance: 50, coordinateSpace: .global)

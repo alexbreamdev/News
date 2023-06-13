@@ -88,13 +88,13 @@ extension NetworkingService.NetworkingError {
             return "URL isn't valid"
         case .custom(let error):
             print(error)
-            return "Something wrong."
+            return "Something went wrong."
         case .invalidStatusCode(let statusCode):
             return "Status code: \(statusCode). Wrong response."
         case .invalidData:
             return "Wrong data response."
         case .failedToDecode(let error):
-        return "Can't decoded data. \(error)"
+            return "Can't decoded data. \(error.localizedDescription)"
         }
     }
 }
