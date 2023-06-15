@@ -35,21 +35,18 @@ struct DiscoverView: View {
             .searchable(text: $searchText, placement: .toolbar, prompt: Text("Apple, Google, etc."))
             .onSubmit(of: .search) {
                 print(searchText)
+                guard !searchText.isEmpty else { return }
                 discoverViewModel.searchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
                 Task {
-                    await discoverViewModel.getAllArticles(false)
+                    await discoverViewModel.getAllArticles(discoverViewModel.sortBy)
                 }
             }
-            .onChange(of: searchText) { _ in
-                discoverViewModel.searchText = searchText
-                if !discoverViewModel.searchText.isEmpty {
-                    task = Task {
-                        try? await Task.sleep(nanoseconds: 500_000_000)
-                        await discoverViewModel.getAllArticles(false)
-                    }
+            .onChange(of: discoverViewModel.sortBy, perform: { sortBy in
+                Task {
+                    print(sortBy.rawValue)
+                    await discoverViewModel.getAllArticles(discoverViewModel.sortBy)
                 }
-                print(searchText, discoverViewModel.articles.count)
-            }
+            })
             .navigationDestination(for: ArticleViewModel.self, destination: { article in
                 ArticleWebView(urlString: article.url)
             })
@@ -58,7 +55,7 @@ struct DiscoverView: View {
                     Menu {
                         Picker("Sort option", selection: $discoverViewModel.sortBy) {
                             ForEach(SortBy.allCases) { sortOption in
-                                Label(sortOption.rawValue.capitalized, systemImage: sortOption.icon)
+                                Label(sortOption.labelText, systemImage: sortOption.icon)
                                     .tag(sortOption)
                             }
                         }
@@ -68,11 +65,7 @@ struct DiscoverView: View {
                     }
                     .tint(appTheme.tintColor)
                 }
-                #if DEBUG
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Text("\(discoverViewModel.articles.count)")
-                }
-                #endif
+        
             }
             .navigationTitle("Discover")
             .alert(isPresented: $discoverViewModel.hasError, error: discoverViewModel.error) {
@@ -97,7 +90,7 @@ extension DiscoverView {
     var alertButton: some View {
         Button {
             Task {
-                await discoverViewModel.getAllArticles(false)
+                await discoverViewModel.getAllArticles(discoverViewModel.sortBy)
             }
         } label: {
             Text("Retry")

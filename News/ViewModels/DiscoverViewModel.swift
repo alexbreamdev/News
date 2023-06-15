@@ -17,6 +17,7 @@ final class DiscoverViewModel: ObservableObject {
     @Published var viewState: ViewState?
     @Published var searchText: String = ""
     @Published var sortBy: SortBy = .publishedAt
+
     
     var isLoading: Bool {
         viewState == .loading
@@ -30,7 +31,7 @@ final class DiscoverViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
     
     private var page: Int = 1
-    private var pageSize: Int? = 20
+    private var pageSize: Int? = 10
     private var totalResults: Int = 0
     private var totalPages: Int? {
         if totalResults > 0, let pageSize = pageSize {
@@ -40,16 +41,8 @@ final class DiscoverViewModel: ObservableObject {
         }
     }
     
-    func getAllArticles(_ isDebug: Bool = false) async {
-        if isDebug {
-            getAllArticlesMock()
-        } else {
-           await getAllArticles()
-        }
-    }
-    
     // initial api call
-    func getAllArticles() async {
+    func getAllArticles(_ sortBy: SortBy) async {
         reset()
         
         guard !searchText.isEmpty else { return }

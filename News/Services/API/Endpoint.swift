@@ -105,7 +105,7 @@ extension Endpoint {
 enum SortBy: String, CaseIterable, Identifiable {
     case relevancy
     case popularity
-    case publishedAt = "Date published"
+    case publishedAt
     
     var icon: String {
         switch self {
@@ -115,6 +115,17 @@ enum SortBy: String, CaseIterable, Identifiable {
             return "person.3"
         case .publishedAt:
             return "clock"
+        }
+    }
+    
+    var labelText: String {
+        switch self {
+        case .relevancy:
+            return "Relevancy"
+        case .popularity:
+            return "Popularity"
+        case .publishedAt:
+            return "Date Published"
         }
     }
     
