@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-#warning("Attribute graph when switch between first and second tabs")
+
 struct MainView: View {
-    @AppStorage("tab") private var selectedTab: Int = 0
+    @AppStorage("tab") private var selectedTab: Int = 1
     @AppStorage("theme") var appTheme: Themes = .main
     
     var body: some View {
@@ -31,5 +31,9 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+            .environmentObject(TopHeadlinesViewModel())
+            .environmentObject(HomeViewModel())
+            .environmentObject(RealmService(name: "previewRealm"))
+            .environmentObject(DiscoverViewModel())
     }
 }

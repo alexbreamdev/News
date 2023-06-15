@@ -21,7 +21,7 @@ struct SettingsView: View {
                         Divider().padding(.vertical, 4)
                         
                         HStack(alignment: .center, spacing: 10) {
-                            Image("placeholder")
+                            Image("IconImage")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 80, height: 80)
@@ -86,7 +86,7 @@ struct SettingsView: View {
                         SettingsRowView(name: "Designer", content: "Oleksii Leshchenko")
                         SettingsRowView(name: "Compatibility", content: "iOS 16")
                         SettingsRowView(name: "Twitter", linkLabel: "@O_V_Leshchenko", linkDestination: "twitter.com/O_V_Leshchenko")
-                        SettingsRowView(name: "Version", content: "0.5.0")
+                        SettingsRowView(name: "Version", content: "0.7.0")
                     }
                 }
             }

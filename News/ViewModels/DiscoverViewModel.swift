@@ -15,7 +15,7 @@ final class DiscoverViewModel: ObservableObject {
     @Published var error: NetworkingService.NetworkingError?
     @Published var hasError: Bool = false
     @Published var viewState: ViewState?
-    @Published var searchText: String = ""
+    @Published var searchText: String = "news"
     @Published var sortBy: SortBy = .publishedAt
 
     
