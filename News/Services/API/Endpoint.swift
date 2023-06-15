@@ -102,6 +102,7 @@ extension Endpoint {
     }
 }
 
+// MARK: - Sorting endpoint
 enum SortBy: String, CaseIterable, Identifiable {
     case relevancy
     case popularity

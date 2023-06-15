@@ -7,7 +7,7 @@
 
 import Foundation
 import RealmSwift
-
+// MARK: - Model for Realm DB
 class ArticleRealm: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: String
     @Persisted var sourceName: String

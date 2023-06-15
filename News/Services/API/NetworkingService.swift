@@ -22,7 +22,6 @@ class NetworkingService {
         }
         // create url request
         let request = buildRequest(from: url, methodType: endpoint.methodType)
-        print(request.url?.absoluteString)
         // async request to API returns data and response
         let (data, response) = try await URLSession.shared.data(for: request)
         

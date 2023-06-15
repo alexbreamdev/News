@@ -101,8 +101,6 @@
 		2F22FD0E2A018A58009F6382 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
-				2F73321D29FFDC3400D9EA80 /* AsyncImageView.swift */,
-				2F89E77029FD397700545DC5 /* NewsListRowView.swift */,
 				2F6161D82A07824A00A15CD5 /* MainCardView.swift */,
 				2F0406A02A311229007C1A74 /* HomeCardView.swift */,
 			);
@@ -114,6 +112,7 @@
 			children = (
 				2F89E78029FD710E00545DC5 /* NewsListView.swift */,
 				2F89E76E29FD2E8E00545DC5 /* CategoryListRoulette.swift */,
+				2F89E77029FD397700545DC5 /* NewsListRowView.swift */,
 			);
 			path = LIsts;
 			sourceTree = "<group>";
@@ -207,6 +206,7 @@
 				2F22FD0F2A018A7F009F6382 /* LIsts */,
 				2F22FD0E2A018A58009F6382 /* Cards */,
 				2F89E77429FD3B5800545DC5 /* ArticleWebView.swift */,
+				2F73321D29FFDC3400D9EA80 /* AsyncImageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

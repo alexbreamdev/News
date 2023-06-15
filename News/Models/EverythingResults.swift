@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Result on /everything endpoing call
+// MARK: - Result on /everything endpoint call
 struct EverythingResults: Codable {
     let status: String
     let totalResults: Int

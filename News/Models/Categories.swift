@@ -8,7 +8,8 @@
 import Foundation
 
 /*
- The category you want to get headlines for. Possible options: business
+ The category you want to get headlines for. Possible options:
+ business
  entertainment
  general
  health

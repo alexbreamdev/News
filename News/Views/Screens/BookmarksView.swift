@@ -14,6 +14,7 @@ struct BookmarksView: View {
     @State private var removeAllDialog: Bool = false
     @State private var tempId: String?
     @State private var path: [ArticleViewModel] = []
+    // use @GestureState
     @State private var offset: CGSize = .zero
     let columns: [GridItem] = [GridItem(.adaptive(minimum: 175)), GridItem(.adaptive(minimum: 175))]
     
